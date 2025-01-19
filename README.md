@@ -18,8 +18,8 @@
 1. Клонируйте репозиторий:
    
    ```bash
-   git clone https://github.com/Zh3nyaZh3nya/logistic-project.git
-   cd logistic-project
+   git clone https://github.com/Zh3nyaZh3nya/job-search.git
+   cd job-search
 
 3. Установите зависимости для frontend:
    
