@@ -1,5 +1,5 @@
 import { vacancy_ru } from "./vacancy_ru";
-import { vacancyTransformToCardSmall } from "./vacancyTransformToCardSmall";
+import { vacancyTransformToCard } from "./vacancyTransformToCard";
 import type { IVacancyCardSmall } from "~/types";
 
-export const vacancy_main_ru: IVacancyCardSmall[] = vacancyTransformToCardSmall(vacancy_ru);
+export const vacancy_main_ru: IVacancyCardSmall[] = vacancyTransformToCard(vacancy_ru, 'small');

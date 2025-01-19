@@ -115,7 +115,17 @@ export interface IVacancy extends IVacancyBase {
     }
     professional_skills: string[]
     personal_skills: string[]
-    address: `${City}, ${string}`
+    city: City
+    address: string
+}
+
+export interface IVacancyCard extends IVacancyBase {
+    to_salary: number | null
+    city: City
+    address: string
+    work_experience: WorkExperience
+    job_format: WorkSchedule
+    education_level: EducationLevel
 }
 
 export interface IResumeBase {

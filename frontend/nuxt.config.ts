@@ -2,7 +2,7 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
-  css: ['~/assets/styles/global.scss', 'vuetify/lib/styles/main.sass'],
+  css: ['~/assets/styles/global.scss', 'vuetify/lib/styles/main.sass', "@/assets/fonts/fonts.css"],
   runtimeConfig: {
     public: {
       apiUrl: process.env.API_ENDPOINT ?? 'http://127.0.0.1:8000/api'

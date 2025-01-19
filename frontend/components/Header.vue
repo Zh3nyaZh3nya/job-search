@@ -19,11 +19,11 @@ const route = useRoute()
 const menu = ref<IMenu[]>([
   {
     title: 'menu_title_1',
-    link: '/search/resume',
+    link: '/resume',
   },
   {
     title: 'menu_title_2',
-    link: '/search/vacancy',
+    link: '/vacancy',
   },
 ])
 
@@ -39,12 +39,12 @@ const changeLanguage = (lang: LocaleCode): void => {
 <template>
   <v-app-bar class="bg-transparent py-2 text-white position-absolute" elevation="0">
     <v-container class="d-flex">
-      <nuxt-link :to="localePath('/')" class="mr-10 text-h4">
+      <nuxt-link :to="localePath('/')" class="mr-10 text-h4 link" :class="route.path !== localePath('/') ? 'text-black' : ''">
         <span class="text-primary font-weight-bold">Search</span><span>Job</span>
       </nuxt-link>
       <ul class="d-flex align-center ga-4">
-        <li v-for="item in menu" :key="item.link" class="link text-h6">
-          <nuxt-link :to="item.link">
+        <li v-for="item in menu" :key="item.link" class="link text-h6" :class="route.path !== localePath('/') ? 'text-black' : ''">
+          <nuxt-link :to="localePath(item.link)">
             {{ $t(item.title) }}
           </nuxt-link>
         </li>
@@ -56,6 +56,7 @@ const changeLanguage = (lang: LocaleCode): void => {
           rounded="xl"
           elevation="0"
           @click="changeLanguage(locale === 'ru' ? locales[1].code : locales[0].code)"
+          :class="route.path !== localePath('/') ? 'text-black' : ''"
       >
         {{ locale === 'ru' ? locales[1].name : locales[0].name }}
       </v-btn>

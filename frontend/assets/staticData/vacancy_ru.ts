@@ -1,5 +1,5 @@
-import type { IVacancy } from "~/types";
 import { WorkSchedule, EducationLevel, EmploymentType, Category, City, Currency, WorkExperience } from "~/types";
+import type { IVacancy } from "~/types";
 
 const data: IVacancy[] = [
     {
@@ -22,7 +22,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["HTML", "CSS", "JavaScript", "Vue.js"],
         personal_skills: ["Коммуникабельность", "Ответственность", "Творческий подход"],
-        address: `${City.ALMATY}, ул. Абая, 50`,
+        city: City.ALMATY,
+        address: "ул. Абая, 50",
     },
     {
         id: 2,
@@ -44,7 +45,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["Навыки продаж", "Переговоры", "Работа с клиентами"],
         personal_skills: ["Целеустремленность", "Гибкость", "Работа в команде"],
-        address: `${City.ASTANA}, ул. Достык, 10`,
+        city: City.ASTANA,
+        address: "ул. Достык, 10",
     },
     {
         id: 3,
@@ -66,7 +68,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["Управление грузовым транспортом", "Знание ПДД", "Техническое обслуживание"],
         personal_skills: ["Внимательность", "Ответственность", "Стрессоустойчивость"],
-        address: `${City.SHYMKENT}, ул. Байтурсынова, 25`,
+        city: City.SHYMKENT,
+        address: "ул. Байтурсынова, 25",
     },
     {
         id: 4,
@@ -88,7 +91,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["C++", "Python", "Алгоритмы и структуры данных"],
         personal_skills: ["Аналитический склад ума", "Ответственность", "Умение работать в команде"],
-        address: `${City.KARAGANDY}, ул. Казыбек би, 17`,
+        city: City.KARAGANDY,
+        address: "ул. Казыбек би, 17",
     },
     {
         id: 5,
@@ -110,7 +114,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["Adobe Photoshop", "Illustrator", "Figma"],
         personal_skills: ["Креативность", "Коммуникабельность", "Работа в сжатые сроки"],
-        address: `${City.AKTAU}, ул. Тауелсиздик, 12`,
+        city: City.AKTAU,
+        address: "ул. Тауелсиздик, 12",
     },
     {
         id: 6,
@@ -132,7 +137,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["Преподавание", "Работа с детьми", "Методики обучения"],
         personal_skills: ["Терпение", "Коммуникабельность", "Ответственность"],
-        address: `${City.TARAZ}, ул. Толе би, 18`,
+        city: City.TARAZ,
+        address: "ул. Толе би, 18",
     },
     {
         id: 7,
@@ -154,7 +160,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["Приготовление кофе", "Обслуживание клиентов"],
         personal_skills: ["Доброжелательность", "Работа в команде", "Энергичность"],
-        address: `${City.KOSTANAY}, ул. Абылайхана, 7`,
+        city: City.KOSTANAY,
+        address: "ул. Абылайхана, 7",
     },
     {
         id: 8,
@@ -176,7 +183,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["Гражданское право", "Консультации", "Договорная работа"],
         personal_skills: ["Внимательность", "Организованность", "Дисциплинированность"],
-        address: `${City.ASTANA}, ул. Иманова, 5`,
+        city: City.ASTANA,
+        address: "ул. Иманова, 5",
     },
     {
         id: 9,
@@ -198,7 +206,8 @@ const data: IVacancy[] = [
         },
         professional_skills: ["Подбор персонала", "Адаптация сотрудников", "Организация мероприятий"],
         personal_skills: ["Коммуникабельность", "Ответственность", "Энергичность"],
-        address: `${City.PETROPAVLOVSK}, ул. Ленина, 10`,
+        city: City.PETROPAVLOVSK,
+        address: "ул. Ленина, 10",
     },
 ];
 

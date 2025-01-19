@@ -5,12 +5,9 @@ import { useLocalePath } from "#i18n";
 import { useI18n } from "vue-i18n";
 
 const store = useStore()
-const { locale } = useI18n()
 const localePath = useLocalePath()
 
-watch(() => locale.value, (newLocale) => {
-  store.updateStateLocale(newLocale);
-}, { immediate: true });
+
 </script>
 
 <template>
@@ -29,7 +26,7 @@ watch(() => locale.value, (newLocale) => {
           <h2 class="text-h4">{{ $t('vacancy') }}</h2>
           <nuxt-link class="text-primary text-h6" :to="localePath('/vacancy')">{{ $t('all-vacancy') }}</nuxt-link>
         </header>
-        <aside>
+        <article>
           <v-row>
             <v-col
                 v-for="(card, index) in store.GET_VACANCY_MAIN"
@@ -41,7 +38,7 @@ watch(() => locale.value, (newLocale) => {
               <VacancyCardSmall :card="card" />
             </v-col>
           </v-row>
-        </aside>
+        </article>
       </v-container>
     </section>
     <section class="index__resume">
@@ -50,7 +47,7 @@ watch(() => locale.value, (newLocale) => {
           <h2 class="text-h4">{{ $t('resume') }}</h2>
           <nuxt-link class="text-primary text-h6" :to="localePath('/vacancy')">{{ $t('all-resume') }}</nuxt-link>
         </header>
-        <aside>
+        <article>
           <v-row>
             <v-col
                 v-for="(card, index) in store.GET_RESUME_MAIN"
@@ -62,7 +59,7 @@ watch(() => locale.value, (newLocale) => {
               <ResumeCardSmall :card="card" />
             </v-col>
           </v-row>
-        </aside>
+        </article>
       </v-container>
     </section>
   </v-main>

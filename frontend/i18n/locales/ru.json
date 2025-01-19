@@ -24,6 +24,8 @@
   "all-vacancy": "Все вакансии",
   "resume": "Резюме",
   "all-resume": "Все рюземе",
+  "ads on": "объявлений на",
+  "publish": "Опубликовано",
   "work_schedule": {
     "FULL_TIME": "Полный рабочий день",
     "PART_TIME": "Неполный рабочий день",
@@ -73,5 +75,23 @@
     "ONE_TO_THREE_YEARS": "от 1 года до 3 лет",
     "THREE_TO_FIVE_YEARS": "от 3 до 5 лет",
     "FIVE_TO_SEVEN_YEARS": "от 5 лет"
-  }
+  },
+  "ALMATY": "Алматы",
+  "ASTANA": "Астана",
+  "SHYMKENT": "Шымкент",
+  "KARAGANDY": "Караганда",
+  "AKTAU": "Актау",
+  "AKTOBE": "Актобе",
+  "ATYRAU": "Атырау",
+  "KOSTANAY": "Костанай",
+  "KYZYLORDA": "Кызылорда",
+  "PAVLODAR": "Павлодар",
+  "TARAZ": "Тараз",
+  "URALSK": "Уральск",
+  "UST_KAMENOGORSK": "Усть-Каменогорск",
+  "SEMEY": "Семей",
+  "KOKSHETAU": "Кокшетау",
+  "TURKESTAN": "Туркестан",
+  "TALDYKORGAN": "Талдыкорган",
+  "PETROPAVLOVSK": "Петропавловск"
 }

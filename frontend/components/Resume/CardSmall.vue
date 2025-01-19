@@ -14,7 +14,7 @@ const localePath = useLocalePath()
 <template>
   <v-card
       v-if="card"
-      class="resume-card-small h-100 d-flex justify-space-between flex-column"
+      class="resume-card-small card-not-hover h-100 d-flex justify-space-between flex-column"
       elevation="0"
       rounded="lg"
       :hover="false"
@@ -22,8 +22,8 @@ const localePath = useLocalePath()
     <header class="pa-5">
       <v-icon :icon="card.avatar" size="57" class="mb-3" color="primary"></v-icon>
       <h3 class="text-caption text-grey mb-1">{{ $t(`educationLevel.${card.education_level}`) }}</h3>
-      <h2 class="text-h6 lh-normal">{{ card.title }}</h2>
-      <h4 class="text-h6 text-primary" v-if="card.from_salary && card.currency">{{ $t('from') }} {{ card.from_salary + card.currency }}</h4>
+      <h2 class="text-h6 lh-normal font-weight-regular">{{ card.title }}</h2>
+      <h4 class="text-h6 text-primary font-weight-regular" v-if="card.from_salary && card.currency">{{ $t('from') }} {{ card.from_salary + card.currency }}</h4>
       <h5 class="text-subtitle-1 text-grey">{{ card.work_experience }}</h5>
     </header>
     <footer>
@@ -46,7 +46,4 @@ const localePath = useLocalePath()
 </template>
 
 <style lang="scss">
-.resume-card-small {
-  border: 1px solid #E5E7EB;
-}
 </style>
