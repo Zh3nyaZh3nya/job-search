@@ -1,6 +1,6 @@
-import { IVacancy, IVacancyCardSmall } from "~/types";
+import type { IVacancy, IVacancyCardSmall } from "~/types";
 
-export function transformToCardSmall(vacancies: IVacancy[]): IVacancyCardSmall[] {
+export function vacancyTransformToCardSmall(vacancies: IVacancy[]): IVacancyCardSmall[] {
     return vacancies.map((vacancy: IVacancy) :IVacancyCardSmall => ({
         id: vacancy.id,
         slug: vacancy.slug,

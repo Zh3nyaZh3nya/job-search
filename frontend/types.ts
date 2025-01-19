@@ -75,6 +75,16 @@ export enum WorkExperience {
     THREE_TO_FIVE_YEARS = "THREE_TO_FIVE_YEARS", // 3-5 лет
     FIVE_TO_SEVEN_YEARS = "FIVE_TO_SEVEN_YEARS", // 5-7 лет
 }
+export enum CategoryDriveLicense {
+    M = "M",
+    A = "A",
+    A1 = "A1",
+    B = "B",
+    B1 = "B1",
+    BE = "BE",
+    C = "C",
+    C1 = "C1",
+}
 
 // Interfaces
 export interface IVacancyBase {
@@ -85,9 +95,11 @@ export interface IVacancyBase {
     category: string
     from_salary: number
     currency: Currency
+    company: string
+    date_publish: string
 }
 
-export interface IVacancyCardSmall extends IVacancyBase {
+export interface IVacancyCardSmall extends Omit<IVacancyBase, 'company' | 'date_publish'> {
     job_format: WorkSchedule
     education: EducationLevel
 }
@@ -106,3 +118,47 @@ export interface IVacancy extends IVacancyBase {
     address: `${City}, ${string}`
 }
 
+export interface IResumeBase {
+    id: number
+    title: string
+    slug: string
+    from_salary: number | null
+    currency: string | null
+    work_experience: string
+    date_publish: string
+    avatar: string
+    education_level: EducationLevel
+}
+
+export interface IResumeCardSmall extends Omit<IResumeBase, 'date_publish'> {
+}
+
+export interface IResume extends IResumeBase {
+    category: Category
+    to_salary: number | null
+    info_resume: {
+        conditions: (EmploymentType | WorkSchedule)[];
+        removal: boolean
+        business_trip: boolean
+        gender: 'MAN' | 'WOMEN'
+        age: number
+        city: City
+        work_experience: {
+            date_from: string
+            date_to: string
+            title: string
+            category: Category
+            company: string
+            desc_experience: string
+        }[]
+        education: {
+            date_from: string
+            place: string
+            professional: string
+        }[]
+        professional_skills: string[]
+        personal_skills: string
+        lang: string[]
+        category_drive_license: CategoryDriveLicense[]
+    }
+}

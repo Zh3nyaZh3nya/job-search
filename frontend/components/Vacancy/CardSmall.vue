@@ -13,13 +13,13 @@ const localePath = useLocalePath()
 <template>
   <v-card
       v-if="card"
-      class="vacancy-card-small"
+      class="vacancy-card-small h-100"
       elevation="0"
       rounded="lg"
       :hover="false"
   >
-    <header class="pa-5 mb-4">
-      <h2 class="text-h6 mb-2">{{ card.title }}</h2>
+    <header class="pa-5">
+      <h2 class="text-h6 mb-2 lh-normal">{{ card.title }}</h2>
       <h3 class="text-subtitle-2 text-primary">{{ $t(`category.${card.category}`) }}</h3>
       <h4 class="text-subtitle-2 text-primary mb-3">{{ $t('from') }} {{ card.from_salary + card.currency }}</h4>
       <h5 class="text-subtitle-2 d-flex align-center ga-2 mb-2">
@@ -31,12 +31,12 @@ const localePath = useLocalePath()
         {{ $t(`educationLevel.${card.education}`) }}
       </h6>
     </header>
-    <v-divider></v-divider>
-    <footer class="pa-5">
+    <footer>
+      <v-divider class="mb-4"></v-divider>
       <v-btn
           :to="localePath(`/vacancy/${card.id}/${card.slug}`)"
           color="primary"
-          class="text-none text-body-1"
+          class="text-none text-body-1 mx-4 mb-4"
           rounded="xl"
           size="large"
           elevation="0"

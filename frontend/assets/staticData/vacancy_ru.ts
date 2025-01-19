@@ -11,6 +11,8 @@ const data: IVacancy[] = [
         from_salary: 2000,
         to_salary: 3000,
         currency: Currency.USD,
+        company: "Tech Solutions",
+        date_publish: "2025-01-18",
         info_vacancy: {
             job_format: WorkSchedule.REMOTE,
             education: EducationLevel.HIGHER,
@@ -31,6 +33,8 @@ const data: IVacancy[] = [
         from_salary: 350000,
         to_salary: null,
         currency: Currency.KZT,
+        company: "Market Experts",
+        date_publish: "2025-01-17",
         info_vacancy: {
             job_format: WorkSchedule.FULL_TIME,
             education: EducationLevel.SECONDARY,
@@ -51,6 +55,8 @@ const data: IVacancy[] = [
         from_salary: 70000,
         to_salary: 100000,
         currency: Currency.RUB,
+        company: "Logistics Corp",
+        date_publish: "2025-01-16",
         info_vacancy: {
             job_format: WorkSchedule.ROTATIONAL,
             education: EducationLevel.SECONDARY,
@@ -71,6 +77,8 @@ const data: IVacancy[] = [
         from_salary: 2500,
         to_salary: 4000,
         currency: Currency.EUR,
+        company: "Code Innovators",
+        date_publish: "2025-01-15",
         info_vacancy: {
             job_format: WorkSchedule.FULL_TIME,
             education: EducationLevel.HIGHER,
@@ -91,6 +99,8 @@ const data: IVacancy[] = [
         from_salary: 300000,
         to_salary: 500000,
         currency: Currency.KZT,
+        company: "Design Studio",
+        date_publish: "2025-01-14",
         info_vacancy: {
             job_format: WorkSchedule.FLEXIBLE,
             education: EducationLevel.VOCATIONAL,
@@ -111,6 +121,8 @@ const data: IVacancy[] = [
         from_salary: 60000,
         to_salary: 90000,
         currency: Currency.RUB,
+        company: "Education Hub",
+        date_publish: "2025-01-13",
         info_vacancy: {
             job_format: WorkSchedule.FULL_TIME,
             education: EducationLevel.HIGHER,
@@ -131,6 +143,8 @@ const data: IVacancy[] = [
         from_salary: 8,
         to_salary: 10,
         currency: Currency.USD,
+        company: "Coffee Lovers",
+        date_publish: "2025-01-12",
         info_vacancy: {
             job_format: WorkSchedule.PART_TIME,
             education: EducationLevel.NONE,
@@ -151,6 +165,8 @@ const data: IVacancy[] = [
         from_salary: 500000,
         to_salary: 700000,
         currency: Currency.KZT,
+        company: "Legal Aid Co.",
+        date_publish: "2025-01-11",
         info_vacancy: {
             job_format: WorkSchedule.FULL_TIME,
             education: EducationLevel.MASTER,
@@ -171,6 +187,8 @@ const data: IVacancy[] = [
         from_salary: 2000,
         to_salary: 3500,
         currency: Currency.EUR,
+        company: "Talent Seekers",
+        date_publish: "2025-01-10",
         info_vacancy: {
             job_format: WorkSchedule.FULL_TIME,
             education: EducationLevel.HIGHER,
