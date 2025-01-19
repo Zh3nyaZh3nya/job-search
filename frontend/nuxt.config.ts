@@ -11,6 +11,11 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+  vuetify: {
+    defaultAssets: {
+      font: false,
+    },
+  },
   modules: [
     '@nuxtjs/i18n',
     'vue-yandex-maps/nuxt',

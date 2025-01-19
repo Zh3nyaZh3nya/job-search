@@ -32,11 +32,29 @@ export const useStore = defineStore("index", {
         },
     },
     getters: {
-        GET_VACANCY: (state: RootState): IVacancy[] => state.vacancy,
-        GET_RESUME: (state: RootState): IResume[] => state.resume,
-        GET_VACANCY_CARD: (state: RootState): IVacancyCard[] => state.vacancy_card,
-        GET_VACANCY_MAIN: (state: RootState): IVacancyCardSmall[] => state.vacancy_main,
-        GET_RESUME_MAIN: (state: RootState): IResumeCardSmall[] => state.resume_main,
-        GET_RESUME_CARD: (state: RootState): IResumeCard[] => state.resume_card,
+        GET_VACANCY: (state: RootState): IVacancy[] => {
+            return state.vacancy;
+        },
+        GET_VACANCY_PAGE(state): (id: number) => IVacancy | undefined {
+            return (id: number) => state.vacancy.find((vacancy) => vacancy.id === id);
+        },
+        GET_VACANCY_CARD(state): IVacancyCard[] {
+            return state.vacancy_card;
+        },
+        GET_VACANCY_MAIN(state): IVacancyCardSmall[] {
+            return state.vacancy_main;
+        },
+        GET_RESUME(state): IResume[] {
+            return state.resume;
+        },
+        GET_RESUME_MAIN(state): IResumeCardSmall[] {
+            return state.resume_main;
+        },
+        GET_RESUME_CARD(state): IResumeCard[] {
+            return state.resume_card;
+        },
+        GET_RESUME_PAGE(state): (id: number) => IResume {
+            return (id: number) => state.resume[id];
+        },
     },
 });

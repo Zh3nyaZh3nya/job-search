@@ -19,8 +19,8 @@ const localePath = useLocalePath()
     <section class="index__vacancy">
       <v-container>
         <header class="d-flex justify-space-between align-center mb-4">
-          <h2 class="text-h4">{{ $t('vacancy') }}</h2>
-          <nuxt-link class="text-primary text-h6" :to="localePath('/vacancy')">{{ $t('all-vacancy') }}</nuxt-link>
+          <h2 class="text-h4">{{ $t('vacancies') }}</h2>
+          <nuxt-link class="text-primary text-h6" :to="localePath('/vacancy')">{{ $t('all-vacancies') }}</nuxt-link>
         </header>
         <article>
           <v-row>
