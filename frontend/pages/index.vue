@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { useStore } from "~/store";
 import { useLocalePath } from "#i18n";
-import { useI18n } from "vue-i18n";
 
 const store = useStore()
 const localePath = useLocalePath()
-
-
 </script>
 
 <template>
@@ -45,7 +41,7 @@ const localePath = useLocalePath()
       <v-container>
         <header class="d-flex align-center justify-space-between mb-4">
           <h2 class="text-h4">{{ $t('resume') }}</h2>
-          <nuxt-link class="text-primary text-h6" :to="localePath('/vacancy')">{{ $t('all-resume') }}</nuxt-link>
+          <nuxt-link class="text-primary text-h6" :to="localePath('/resume')">{{ $t('all-resume') }}</nuxt-link>
         </header>
         <article>
           <v-row>

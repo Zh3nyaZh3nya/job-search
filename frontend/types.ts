@@ -138,13 +138,13 @@ export interface IResumeBase {
     date_publish: string
     avatar: string
     education_level: EducationLevel
+    category: Category
 }
 
-export interface IResumeCardSmall extends Omit<IResumeBase, 'date_publish'> {
+export interface IResumeCardSmall extends Omit<IResumeBase, 'date_publish' | "category"> {
 }
 
 export interface IResume extends IResumeBase {
-    category: Category
     to_salary: number | null
     info_resume: {
         conditions: (EmploymentType | WorkSchedule)[];
@@ -171,4 +171,9 @@ export interface IResume extends IResumeBase {
         lang: string[]
         category_drive_license: CategoryDriveLicense[]
     }
+}
+
+export interface IResumeCard extends IResumeBase {
+    city: City
+    to_salary: number | null
 }
