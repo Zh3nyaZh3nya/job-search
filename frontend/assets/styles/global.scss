@@ -1,13 +1,15 @@
 a {
   text-decoration: none;
   color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.link {
   transition: color 0.15s ease;
   &:hover {
     color: rgb(var(--v-theme-primary)) !important;
   }
-}
-
-
-ul {
-  list-style: none;
 }

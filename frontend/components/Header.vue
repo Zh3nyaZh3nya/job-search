@@ -43,7 +43,7 @@ const changeLanguage = (lang: LocaleCode): void => {
         <span class="text-primary font-weight-bold">Search</span><span>Job</span>
       </nuxt-link>
       <ul class="d-flex align-center ga-4">
-        <li v-for="item in menu" :key="item.link" class="text-h6">
+        <li v-for="item in menu" :key="item.link" class="link text-h6">
           <nuxt-link :to="item.link">
             {{ $t(item.title) }}
           </nuxt-link>

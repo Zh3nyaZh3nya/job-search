@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import i18n from '@nuxtjs/i18n'
 
 export default defineNuxtConfig({
   css: ['~/assets/styles/global.scss', 'vuetify/lib/styles/main.sass'],
