@@ -23,8 +23,8 @@ const props = defineProps<IProps>()
       <v-divider class="mb-2"></v-divider>
       <span class="text-body-2 text-grey">{{ $t('vacancy') }} {{ $t('publish_2') }} {{ card.date_publish }}</span>
       <h1 class="mb-1 text-h5 font-weight-bold">{{ card.title }}</h1>
-      <span v-if="!card.to_salary" class="text-primary text-h4 mb-1">{{ card.from_salary }}{{ card.currency }}</span>
-      <span v-else class="mb-1">{{ $t('from')}} {{ card.from_salary }} {{ $t('to') }} {{ card.to_salary }}{{ card.currency }}</span>
+      <p v-if="!card.to_salary" class="text-primary text-h4 mb-1">{{ card.from_salary }}{{ card.currency }}</p>
+      <p v-else class="mb-1">{{ $t('from')}} {{ card.from_salary }} {{ $t('to') }} {{ card.to_salary }}{{ card.currency }}</p>
       <h2 class="text-primary font-weight-regular text-h6 mb-1">{{ card.post }}</h2>
       <h3 class="text-grey text-body-1 mb-2">{{ $t(`category.${card.category}`) }}</h3>
       <v-divider class="mb-2"></v-divider>
@@ -33,7 +33,9 @@ const props = defineProps<IProps>()
         <v-row>
           <v-col cols="12" md="4">
             <div>
-              <p class="mb-1 info-vacancy-types"><label class="text-grey">{{ $t('employment_type') }}</label> {{ $t(`employmentType.${card.info_vacancy.type_employment}`) }}</p>
+              <p class="mb-1 info-vacancy-types">
+                <label class="text-grey">{{ $t('employment_type') }}</label>
+                {{ $t(`employmentType.${card.info_vacancy.type_employment}`) }}</p>
               <p class="mb-1 info-vacancy-types"><label class="text-grey">{{ $t('work_schedule_text') }}</label> {{ $t(`work_schedule.${card.info_vacancy.type_employment}`) }}</p>
               <p class="mb-1 info-vacancy-types"><label class="text-grey">{{ $t('internship') }}</label> {{ card.info_vacancy.internship ? $t('yes') : $t('no') }}</p>
             </div>

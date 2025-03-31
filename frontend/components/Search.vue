@@ -3,9 +3,22 @@ import { ref } from "vue"
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'job',
+    required: false
+  },
+  search: {
+    type: String,
+    default: '',
+    requited: false,
+  }
+})
 
-const selectItem = ref('job')
-const selectItems = ref([
+const search = ref(props.search || null)
+const selectItem = ref<'job' | 'members'>(props.type || 'job')
+const selectItems = [
   {
     title: t('search_selects_1'),
     value: 'job',
@@ -14,7 +27,7 @@ const selectItems = ref([
     title: t('search_selects_2'),
     value: 'members'
   }
-])
+]
 </script>
 
 <template>
@@ -30,10 +43,28 @@ const selectItems = ref([
           min-width="220"
       ></v-select>
 
-      <v-text-field :placeholder="$t('search_placeholder')" :hide-details="true" variant="solo" elevation="0" width="100%" rounded="pill">
-
-      </v-text-field>
-      <v-btn rounded="pill" class="text-none text-body-1" size="x-large" height="56px" color="primary">
+      <v-text-field
+          :placeholder="$t('search_placeholder')"
+          :hide-details="true"
+          variant="solo"
+          elevation="0"
+          width="100%"
+          rounded="pill"
+          v-model="search"
+      />
+      <v-btn
+          rounded="pill"
+          class="text-none text-body-1"
+          size="x-large"
+          height="56px"
+          color="primary"
+          @click="$router.push(
+            {
+              path: '/search',
+              query: { type: selectItem, search: search }
+            }
+          )"
+      >
         {{ $t('search') }}
       </v-btn>
     </v-form>

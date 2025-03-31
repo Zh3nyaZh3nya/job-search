@@ -29,7 +29,7 @@ const localePath = useLocalePath()
     <footer>
       <div class="mx-4">
         <v-btn
-            :to="localePath(`/vacancy/${card.id}/${card.slug}`)"
+            :to="localePath(`/resume/${card.id}/${card.slug}`)"
             color="primary"
             class="text-none text-body-1 mb-4"
             rounded="xl"
