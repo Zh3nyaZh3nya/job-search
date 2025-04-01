@@ -1,6 +1,13 @@
 import { staticData } from "assets/staticData";
 import { defineStore } from "pinia";
-import type { IVacancy, IVacancyCardSmall, IResume, IResumeCardSmall, IVacancyCard, IResumeCard } from "~/types";
+import {
+    Category, City, Currency, EducationLevel,
+    EmploymentType, WorkExperience, WorkSchedule
+} from "~/types";
+import type {
+    IVacancy, IVacancyCardSmall, IResume, IResumeCardSmall,
+    IVacancyCard, IResumeCard
+} from "~/types";
 
 interface RootState {
     vacancy: IVacancy[]
@@ -9,6 +16,15 @@ interface RootState {
     resume: IResume[]
     resume_main: IResumeCardSmall[]
     resume_card: IResumeCard[]
+    filters: {
+        city: City | null
+        work_schedule: WorkSchedule[] | null
+        employment: EmploymentType[] | null
+        education_level: EducationLevel[] | null
+        category: Category[] | null
+        currency: Currency[] | null
+        work_experience: WorkExperience[] | null
+    }
 }
 
 export const useStore = defineStore("index", {
@@ -19,6 +35,15 @@ export const useStore = defineStore("index", {
         resume: staticData.resume.ru,
         resume_main: staticData.resumeMain.ru,
         resume_card: staticData.resumeCard.ru,
+        filters: {
+            city: null,
+            work_schedule: null,
+            employment: null,
+            education_level: null,
+            category: null,
+            currency: null,
+            work_experience: null,
+        }
     }),
     actions: {
         updateStateLocale(locale: string): void {
@@ -39,7 +64,57 @@ export const useStore = defineStore("index", {
             return (id: number) => state.vacancy.find((vacancy) => vacancy.id === id);
         },
         GET_VACANCY_CARD(state): IVacancyCard[] {
-            return state.vacancy_card;
+            const {
+                city,
+                work_schedule,
+                employment,
+                education_level,
+                category,
+                currency,
+                work_experience
+            } = state.filters;
+
+            const isEmpty = (value: any) =>
+                value === null || value === undefined || (Array.isArray(value) && value.length === 0);
+
+            const noFiltersApplied =
+                isEmpty(city) &&
+                isEmpty(work_schedule) &&
+                isEmpty(employment) &&
+                isEmpty(education_level) &&
+                isEmpty(category) &&
+                isEmpty(currency) &&
+                isEmpty(work_experience);
+
+            if (noFiltersApplied) {
+                return state.vacancy_card;
+            }
+
+            const filteredVacancies = state.vacancy.filter((item: IVacancy) => {
+                const matchesCity = city ? item.city === city : true;
+                const matchesWorkSchedule = work_schedule?.length
+                    ? work_schedule.includes(item.info_vacancy.type_employment)
+                    : true;
+                const matchesEducation = education_level?.length ? education_level.includes(item.info_vacancy.education) : true;
+                const matchesCategory = category?.length ? category.includes(item.category) : true;
+                const matchesCurrency = currency?.length ? currency.includes(item.currency) : true;
+                const matchesWorkExperience = work_experience?.length
+                    ? work_experience.includes(item.info_vacancy.work_experience)
+                    : true;
+
+                return (
+                    matchesCity &&
+                    matchesWorkSchedule &&
+                    matchesEducation &&
+                    matchesCategory &&
+                    matchesCurrency &&
+                    matchesWorkExperience
+                );
+            });
+
+            const filteredIds = new Set(filteredVacancies.map(v => v.id));
+
+            return state.vacancy_card.filter(card => filteredIds.has(card.id));
         },
         GET_VACANCY_MAIN(state): IVacancyCardSmall[] {
             return state.vacancy_main;
@@ -51,7 +126,53 @@ export const useStore = defineStore("index", {
             return state.resume_main;
         },
         GET_RESUME_CARD(state): IResumeCard[] {
-            return state.resume_card;
+            const {
+                city,
+                work_schedule,
+                employment,
+                education_level,
+                category,
+                currency,
+                work_experience
+            } = state.filters;
+
+            const isEmpty = (value: any) =>
+                value === null || value === undefined || (Array.isArray(value) && value.length === 0);
+
+            const noFiltersApplied =
+                isEmpty(city) &&
+                isEmpty(work_schedule) &&
+                isEmpty(employment) &&
+                isEmpty(education_level) &&
+                isEmpty(category) &&
+                isEmpty(currency) &&
+                isEmpty(work_experience);
+
+            if (noFiltersApplied) {
+                return state.resume_card;
+            }
+
+            const filteredResumes = state.resume.filter((item: IResume) => {
+                const matchesCity = city ? item.city === city : true;
+                const matchesWorkSchedule = work_schedule?.length
+                    ? item.info_resume?.conditions?.some(c => work_schedule.includes(c)) ?? false
+                    : true;
+                const matchesEducation = education_level?.length ? education_level.includes(item.education_level) : true;
+                const matchesCategory = category?.length ? category.includes(item.category) : true;
+                const matchesCurrency = currency?.length ? currency.includes(item.currency) : true;
+
+                return (
+                    matchesCity &&
+                    matchesWorkSchedule &&
+                    matchesEducation &&
+                    matchesCategory &&
+                    matchesCurrency
+                );
+            });
+
+            const filteredIds = new Set(filteredResumes.map(r => r.id));
+
+            return state.resume_card.filter(card => filteredIds.has(card.id));
         },
         GET_RESUME_PAGE(state): (id: number) => IResume | undefined {
             return (id: number) => state.resume.find((resume) => resume.id === id);
@@ -78,7 +199,6 @@ export const useStore = defineStore("index", {
             }
 
             return undefined;
-        }
-
+        },
     },
 });

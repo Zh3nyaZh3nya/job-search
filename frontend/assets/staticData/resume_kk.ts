@@ -20,7 +20,7 @@ const data: IResume[] = [
         currency: Currency.USD,
         work_experience: WorkExperience.ONE_TO_THREE_YEARS,
         date_publish: "2025-01-18",
-        avatar: "https://example.com/avatar1.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.HIGHER,
         category: Category.IT,
         info_resume: {
@@ -62,7 +62,7 @@ const data: IResume[] = [
         currency: Currency.KZT,
         work_experience: WorkExperience.NO_EXPERIENCE,
         date_publish: "2025-01-17",
-        avatar: "https://example.com/avatar2.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.SECONDARY,
         category: Category.SALES,
         info_resume: {
@@ -95,7 +95,7 @@ const data: IResume[] = [
         currency: Currency.RUB,
         work_experience: WorkExperience.THREE_TO_FIVE_YEARS,
         date_publish: "2025-01-16",
-        avatar: "https://example.com/avatar3.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.SECONDARY,
         category: Category.TRANSPORT,
         info_resume: {
@@ -137,7 +137,7 @@ const data: IResume[] = [
         currency: Currency.KZT,
         work_experience: WorkExperience.ONE_TO_THREE_YEARS,
         date_publish: "2025-01-15",
-        avatar: "https://example.com/avatar4.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.VOCATIONAL,
         category: Category.DESIGN,
         info_resume: {
@@ -179,7 +179,7 @@ const data: IResume[] = [
         currency: Currency.EUR,
         work_experience: WorkExperience.FIVE_TO_SEVEN_YEARS,
         date_publish: "2025-01-14",
-        avatar: "https://example.com/avatar5.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.HIGHER,
         category: Category.IT,
         info_resume: {
@@ -221,7 +221,7 @@ const data: IResume[] = [
         currency: Currency.RUB,
         work_experience: WorkExperience.ONE_TO_THREE_YEARS,
         date_publish: "2025-01-13",
-        avatar: "https://example.com/avatar6.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.HIGHER,
         category: Category.EDUCATION,
         info_resume: {
@@ -263,7 +263,7 @@ const data: IResume[] = [
         currency: Currency.USD,
         work_experience: WorkExperience.NO_EXPERIENCE,
         date_publish: "2025-01-12",
-        avatar: "https://example.com/avatar7.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.NONE,
         category: Category.SERVICE,
         info_resume: {
@@ -290,7 +290,7 @@ const data: IResume[] = [
         currency: Currency.KZT,
         work_experience: WorkExperience.THREE_TO_FIVE_YEARS,
         date_publish: "2025-01-11",
-        avatar: "https://example.com/avatar8.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.MASTER,
         category: Category.LAW,
         info_resume: {
@@ -332,7 +332,7 @@ const data: IResume[] = [
         currency: Currency.EUR,
         work_experience: WorkExperience.ONE_TO_THREE_YEARS,
         date_publish: "2025-01-10",
-        avatar: "https://example.com/avatar9.jpg",
+        avatar: "mdi-account-circle-outline",
         education_level: EducationLevel.HIGHER,
         category: Category.HR,
         info_resume: {
