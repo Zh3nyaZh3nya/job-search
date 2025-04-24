@@ -17,7 +17,6 @@ export default defineNuxtConfig({
     },
   },
   modules: [
-    '@nuxtjs/sitemap',
     '@nuxtjs/i18n',
     'vue-yandex-maps/nuxt',
     '@pinia/nuxt',

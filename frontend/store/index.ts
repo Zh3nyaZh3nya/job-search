@@ -152,7 +152,7 @@ export const useStore = defineStore("index", {
             }
 
             const filteredResumes = state.resume.filter((item: IResume) => {
-                const matchesCity = city ? item.city === city : true;
+                const matchesCity = city ? item.info_resume.city === city : true;
                 const matchesWorkSchedule = work_schedule?.length
                     ? item.info_resume?.conditions?.some(c => work_schedule.includes(c)) ?? false
                     : true;

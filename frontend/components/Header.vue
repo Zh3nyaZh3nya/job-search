@@ -26,6 +26,7 @@ const menu = ref<IMenu[]>([
     link: '/vacancy',
   },
 ])
+const select = ref<'employer' | 'member' | null>(null)
 
 const changeLanguage = (lang: LocaleCode): void => {
   if (locale.value !== lang) {
@@ -60,15 +61,62 @@ const changeLanguage = (lang: LocaleCode): void => {
       >
         {{ locale === 'ru' ? locales[1].name : locales[0].name }}
       </v-btn>
-      <v-btn
-          class="bg-primary text-none text-body-1"
-          rounded="xl"
-          elevation="0"
-      >
-        {{ $t('enter') }}
-      </v-btn>
+      <v-dialog max-width="500">
+        <template v-slot:activator="{ props: activatorProps }">
+          <v-btn
+              v-bind="activatorProps"
+              class="bg-primary text-none text-body-1"
+              rounded="xl"
+              elevation="0"
+          >
+            {{ $t('enter') }}
+          </v-btn>
+        </template>
+
+        <template v-slot:default="{ isActive }">
+          <v-card rounded="xl" class="pa-4">
+            <p class="text-h5 text-center mb-4">Авторизация</p>
+            <v-select
+                v-model="select"
+                :label="$t('select-variant-enter')"
+                variant="outlined"
+                rounded="xl"
+                :items="[
+                  {
+                    title: $t('employer'),
+                    value: 'employer'
+                  },
+                  {
+                    title: $t('members'),
+                    value: 'members'
+                  }
+                ]"
+                item-title="title"
+                item-value="value"
+                color="primary"
+            >
+
+            </v-select>
+            <div class="d-flex justify-center">
+              <v-btn
+                  color="primary"
+                  class="text-decoration-none text-h6"
+                  size="large"
+                  elevation="0"
+                  :to="select === 'employer' ? localePath('/employer') : localePath('/member')"
+                  @click="isActive.value = false"
+              >
+                {{ $t('enter') }}
+              </v-btn>
+            </div>
+
+          </v-card>
+        </template>
+      </v-dialog>
+
     </v-container>
   </v-app-bar>
+
 </template>
 
 <style scoped>

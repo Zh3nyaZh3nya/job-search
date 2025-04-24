@@ -13,7 +13,10 @@
       "education_level": "HIGHER",
       "category": "IT",
       "info_resume": {
-        "conditions": ["FULL_TIME", "REMOTE"],
+        "conditions": [
+          "FULL_TIME",
+          "REMOTE"
+        ],
         "removal": true,
         "business_trip": false,
         "gender": "MAN",
@@ -36,10 +39,20 @@
             "professional": "Информационные технологии"
           }
         ],
-        "professional_skills": ["HTML", "CSS", "JavaScript", "Vue.js"],
+        "professional_skills": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Vue.js"
+        ],
         "personal_skills": "Коммуникабельность, ответственность, креативность.",
-        "lang": ["Русский", "Английский"],
-        "category_drive_license": ["B"]
+        "lang": [
+          "Русский",
+          "Английский"
+        ],
+        "category_drive_license": [
+          "B"
+        ]
       }
     },
     {
@@ -55,7 +68,9 @@
       "education_level": "SECONDARY",
       "category": "SALES",
       "info_resume": {
-        "conditions": ["PART_TIME"],
+        "conditions": [
+          "PART_TIME"
+        ],
         "removal": false,
         "business_trip": false,
         "gender": "WOMEN",
@@ -69,9 +84,15 @@
             "professional": "Менеджмент"
           }
         ],
-        "professional_skills": ["Навыки продаж", "Переговоры", "Работа с клиентами"],
+        "professional_skills": [
+          "Навыки продаж",
+          "Переговоры",
+          "Работа с клиентами"
+        ],
         "personal_skills": "Коммуникабельность, целеустремленность, гибкость.",
-        "lang": ["Русский"],
+        "lang": [
+          "Русский"
+        ],
         "category_drive_license": []
       }
     },
@@ -88,7 +109,10 @@
       "education_level": "SECONDARY",
       "category": "TRANSPORT",
       "info_resume": {
-        "conditions": ["TEMPORARY", "ROTATIONAL"],
+        "conditions": [
+          "TEMPORARY",
+          "ROTATIONAL"
+        ],
         "removal": false,
         "business_trip": true,
         "gender": "MAN",
@@ -111,10 +135,19 @@
             "professional": "Механика"
           }
         ],
-        "professional_skills": ["Управление грузовым транспортом", "Техническое обслуживание"],
+        "professional_skills": [
+          "Управление грузовым транспортом",
+          "Техническое обслуживание"
+        ],
         "personal_skills": "Ответственность, стрессоустойчивость, внимательность.",
-        "lang": ["Русский", "Казахский"],
-        "category_drive_license": ["C", "B"]
+        "lang": [
+          "Русский",
+          "Казахский"
+        ],
+        "category_drive_license": [
+          "C",
+          "B"
+        ]
       }
     },
     {
@@ -130,7 +163,10 @@
       "education_level": "VOCATIONAL",
       "category": "DESIGN",
       "info_resume": {
-        "conditions": ["FREELANCE", "FLEXIBLE"],
+        "conditions": [
+          "FREELANCE",
+          "FLEXIBLE"
+        ],
         "removal": true,
         "business_trip": false,
         "gender": "WOMEN",
@@ -153,9 +189,16 @@
             "professional": "Графический дизайн"
           }
         ],
-        "professional_skills": ["Adobe Photoshop", "Illustrator", "Figma"],
+        "professional_skills": [
+          "Adobe Photoshop",
+          "Illustrator",
+          "Figma"
+        ],
         "personal_skills": "Креативность, работа в команде, коммуникабельность.",
-        "lang": ["Русский", "Английский"],
+        "lang": [
+          "Русский",
+          "Английский"
+        ],
         "category_drive_license": []
       }
     },
@@ -172,7 +215,9 @@
       "education_level": "HIGHER",
       "category": "IT",
       "info_resume": {
-        "conditions": ["FULL_TIME"],
+        "conditions": [
+          "FULL_TIME"
+        ],
         "removal": true,
         "business_trip": true,
         "gender": "MAN",
@@ -195,10 +240,19 @@
             "professional": "Программная инженерия"
           }
         ],
-        "professional_skills": ["C++", "Python", "Алгоритмы и структуры данных"],
+        "professional_skills": [
+          "C++",
+          "Python",
+          "Алгоритмы и структуры данных"
+        ],
         "personal_skills": "Ответственность, аналитическое мышление, работа в команде.",
-        "lang": ["Русский", "Английский"],
-        "category_drive_license": ["B"]
+        "lang": [
+          "Русский",
+          "Английский"
+        ],
+        "category_drive_license": [
+          "B"
+        ]
       }
     },
     {
@@ -214,7 +268,10 @@
       "education_level": "HIGHER",
       "category": "EDUCATION",
       "info_resume": {
-        "conditions": ["FULL_TIME", "FREE"],
+        "conditions": [
+          "FULL_TIME",
+          "FREE"
+        ],
         "removal": false,
         "business_trip": false,
         "gender": "WOMEN",
@@ -237,9 +294,16 @@
             "professional": "Преподавание математики"
           }
         ],
-        "professional_skills": ["Преподавание", "Работа с детьми", "Методики обучения"],
+        "professional_skills": [
+          "Преподавание",
+          "Работа с детьми",
+          "Методики обучения"
+        ],
         "personal_skills": "Терпение, ответственность, креативность.",
-        "lang": ["Русский", "Казахский"],
+        "lang": [
+          "Русский",
+          "Казахский"
+        ],
         "category_drive_license": []
       }
     },
@@ -256,7 +320,10 @@
       "education_level": "NONE",
       "category": "SERVICE",
       "info_resume": {
-        "conditions": ["PART_TIME", "SHIFT"],
+        "conditions": [
+          "PART_TIME",
+          "SHIFT"
+        ],
         "removal": false,
         "business_trip": false,
         "gender": "MAN",
@@ -264,9 +331,14 @@
         "city": "KOSTANAY",
         "work_experience": [],
         "education": [],
-        "professional_skills": ["Приготовление кофе", "Обслуживание клиентов"],
+        "professional_skills": [
+          "Приготовление кофе",
+          "Обслуживание клиентов"
+        ],
         "personal_skills": "Доброжелательность, работа в команде, энергичность.",
-        "lang": ["Русский"],
+        "lang": [
+          "Русский"
+        ],
         "category_drive_license": []
       }
     },
@@ -283,7 +355,9 @@
       "education_level": "MASTER",
       "category": "LAW",
       "info_resume": {
-        "conditions": ["FULL_TIME"],
+        "conditions": [
+          "FULL_TIME"
+        ],
         "removal": false,
         "business_trip": true,
         "gender": "MAN",
@@ -306,10 +380,19 @@
             "professional": "Юриспруденция"
           }
         ],
-        "professional_skills": ["Гражданское право", "Консультации", "Договорная работа"],
+        "professional_skills": [
+          "Гражданское право",
+          "Консультации",
+          "Договорная работа"
+        ],
         "personal_skills": "Внимательность, организованность, дисциплинированность.",
-        "lang": ["Русский", "Английский"],
-        "category_drive_license": ["B"]
+        "lang": [
+          "Русский",
+          "Английский"
+        ],
+        "category_drive_license": [
+          "B"
+        ]
       }
     },
     {
@@ -325,7 +408,9 @@
       "education_level": "HIGHER",
       "category": "HR",
       "info_resume": {
-        "conditions": ["FULL_TIME"],
+        "conditions": [
+          "FULL_TIME"
+        ],
         "removal": true,
         "business_trip": false,
         "gender": "WOMEN",
@@ -348,9 +433,67 @@
             "professional": "Управление персоналом"
           }
         ],
-        "professional_skills": ["Подбор персонала", "Адаптация сотрудников", "Организация мероприятий"],
+        "professional_skills": [
+          "Подбор персонала",
+          "Адаптация сотрудников",
+          "Организация мероприятий"
+        ],
         "personal_skills": "Коммуникабельность, ответственность, энергичность.",
-        "lang": ["Русский", "Английский"],
+        "lang": [
+          "Русский",
+          "Английский"
+        ],
+        "category_drive_license": []
+      }
+    },
+    {
+      "id": 10,
+      "title": "HR-менеджер",
+      "slug": "hr-manager",
+      "from_salary": 2000,
+      "to_salary": 3500,
+      "currency": "€",
+      "work_experience": "2 года",
+      "date_publish": "2025-01-10",
+      "avatar": "mdi-account-circle-outline",
+      "education_level": "HIGHER",
+      "category": "HR",
+      "info_resume": {
+        "conditions": [
+          "FULL_TIME"
+        ],
+        "removal": true,
+        "business_trip": false,
+        "gender": "WOMEN",
+        "age": 29,
+        "city": "PETROPAVLOVSK",
+        "work_experience": [
+          {
+            "date_from": "2021-01-01",
+            "date_to": "2024-12-31",
+            "title": "HR-менеджер",
+            "category": "HR",
+            "company": "Global HR Solutions",
+            "desc_experience": "Подбор персонала, организация тренингов и адаптация сотрудников."
+          }
+        ],
+        "education": [
+          {
+            "date_from": "2016-09-01",
+            "place": "Казахстанский университет менеджмента",
+            "professional": "Управление персоналом"
+          }
+        ],
+        "professional_skills": [
+          "Подбор персонала",
+          "Адаптация сотрудников",
+          "Организация мероприятий"
+        ],
+        "personal_skills": "Коммуникабельность, ответственность, энергичность.",
+        "lang": [
+          "Русский",
+          "Английский"
+        ],
         "category_drive_license": []
       }
     }

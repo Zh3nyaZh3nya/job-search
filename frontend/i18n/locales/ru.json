@@ -59,6 +59,9 @@
   "professions": "Профессиональная область",
   "reset": "Сбросить",
   "currency": "Валюта",
+  "select-variant-enter": "Выберите вариант входа",
+  "employer": "Работодатель",
+  "members": "Работник",
   "work_schedule": {
     "FULL_TIME": "Полный рабочий день",
     "PART_TIME": "Неполный рабочий день",
