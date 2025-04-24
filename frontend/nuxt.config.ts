@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    '@nuxtjs/sitemap',
     '@nuxtjs/i18n',
     'vue-yandex-maps/nuxt',
     '@pinia/nuxt',
@@ -37,8 +38,8 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: "ru",
     locales: [
-      { code: "ru", name: "Рус", file: 'locales/ru.json' },
-      { code: "kk", name: "Каз", file: 'locales/kk.json' },
+      { code: "ru", name: "Рус", iso: 'ru-KZ', file: 'locales/ru.json' },
+      { code: "kk", name: "Каз", iso: 'kk-KZ', file: 'locales/kk.json' },
     ],
     lazy: true,
     langDir: '',
@@ -60,6 +61,6 @@ export default defineNuxtConfig({
     ]
   },
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   ssr: true
 })

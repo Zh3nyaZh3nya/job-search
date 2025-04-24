@@ -29,12 +29,12 @@ interface RootState {
 
 export const useStore = defineStore("index", {
     state: (): RootState => ({
-        vacancy: staticData.vacancy.ru,
-        vacancy_main: staticData.vacancyMain.ru,
-        vacancy_card: staticData.vacancyCard.ru,
-        resume: staticData.resume.ru,
-        resume_main: staticData.resumeMain.ru,
-        resume_card: staticData.resumeCard.ru,
+        vacancy: staticData.vacancy,
+        vacancy_main: staticData.vacancyMain,
+        vacancy_card: staticData.vacancyCard,
+        resume: staticData.resume,
+        resume_main: staticData.resumeMain,
+        resume_card: staticData.resumeCard,
         filters: {
             city: null,
             work_schedule: null,
@@ -47,13 +47,12 @@ export const useStore = defineStore("index", {
     }),
     actions: {
         updateStateLocale(locale: string): void {
-            const lang: "kk" | "ru" = locale === "kk" ? "kk" : "ru";
-            this.vacancy = staticData.vacancy[lang];
-            this.vacancy_main = staticData.vacancyMain[lang];
-            this.vacancy_card = staticData.vacancyCard[lang];
-            this.resume = staticData.resume[lang];
-            this.resume_main = staticData.resumeMain[lang];
-            this.resume_card = staticData.resumeCard[lang];
+            this.vacancy = staticData.vacancy;
+            this.vacancy_main = staticData.vacancyMain;
+            this.vacancy_card = staticData.vacancyCard;
+            this.resume = staticData.resume;
+            this.resume_main = staticData.resumeMain;
+            this.resume_card = staticData.resumeCard;
         },
     },
     getters: {
