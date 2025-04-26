@@ -3,6 +3,7 @@ import { ref } from "vue"
 import { useI18n } from 'vue-i18n'
 import { useRouter, useRoute } from 'vue-router'
 import { useLocalePath } from "#i18n"
+import { useAuthStore } from "~/store/auth";
 
 type LocaleCode = typeof locales.value[number]['code']
 
@@ -11,10 +12,13 @@ interface IMenu {
   link: string
 }
 
-const { locale, locales } = useI18n()
+type Select = 'employer' | 'member'
+
+const { locale, locales, t } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
 const route = useRoute()
+const authStore = useAuthStore()
 
 const menu = ref<IMenu[]>([
   {
@@ -26,7 +30,11 @@ const menu = ref<IMenu[]>([
     link: '/vacancy',
   },
 ])
-const select = ref<'employer' | 'member' | null>(null)
+const select = ref<Select>('member')
+const tab = ref<'auth' | 'register'>('auth')
+const rules = {
+  required: (v: any) => !!v || t('required'),
+}
 
 const changeLanguage = (lang: LocaleCode): void => {
   if (locale.value !== lang) {
@@ -61,7 +69,7 @@ const changeLanguage = (lang: LocaleCode): void => {
       >
         {{ locale === 'ru' ? locales[1].name : locales[0].name }}
       </v-btn>
-      <v-dialog max-width="500">
+      <v-dialog max-width="500" v-if="!authStore.isAuthenticated">
         <template v-slot:activator="{ props: activatorProps }">
           <v-btn
               v-bind="activatorProps"
@@ -74,46 +82,75 @@ const changeLanguage = (lang: LocaleCode): void => {
         </template>
 
         <template v-slot:default="{ isActive }">
-          <v-card rounded="xl" class="pa-4">
-            <p class="text-h5 text-center mb-4">Авторизация</p>
-            <v-select
-                v-model="select"
-                :label="$t('select-variant-enter')"
-                variant="outlined"
-                rounded="xl"
-                :items="[
-                  {
-                    title: $t('employer'),
-                    value: 'employer'
-                  },
-                  {
-                    title: $t('members'),
-                    value: 'members'
-                  }
-                ]"
-                item-title="title"
-                item-value="value"
-                color="primary"
-            >
-
-            </v-select>
-            <div class="d-flex justify-center">
-              <v-btn
-                  color="primary"
-                  class="text-decoration-none text-h6"
-                  size="large"
-                  elevation="0"
-                  :to="select === 'employer' ? localePath('/employer') : localePath('/member')"
-                  @click="isActive.value = false"
+          <v-card rounded="lg" class="pa-4">
+            <div class="d-flex justify-center mb-4">
+              <v-tabs
+                  v-model="tab"
+                  class="d-flex justify-center"
               >
-                {{ $t('enter') }}
-              </v-btn>
+                <v-tab value="auth" color="primary">{{ $t('auth') }}</v-tab>
+                <v-tab value="register" color="primary">{{ $t('register') }}</v-tab>
+              </v-tabs>
+            </div>
+
+            <div>
+              <v-tabs-window v-model="tab">
+                <v-tabs-window-item value="auth">
+                  <formLogin :select="select" />
+                </v-tabs-window-item>
+
+                <v-tabs-window-item value="register">
+                  <div class="d-flex justify-center my-2">
+                    <v-select
+                        v-model="select"
+                        :label="tab === 'auth' ? $t('select-variant-enter') : $t('select-variant-register')"
+                        variant="outlined"
+                        rounded="lg"
+                        max-width="250px"
+                        :items="[
+                          {
+                            title: $t('employer'),
+                            value: 'employer'
+                          },
+                          {
+                            title: $t('member'),
+                            value: 'member'
+                          }
+                        ]"
+                        item-title="title"
+                        item-value="value"
+                        color="primary"
+                        :hide-details="true"
+                        :rules="[rules.required]"
+                    >
+                    </v-select>
+                  </div>
+
+                  <v-tabs-window v-model="select">
+                    <v-tabs-window-item value="member">
+                      <formRegister :select="select" @submitForm="isActive.value = false" />
+                    </v-tabs-window-item>
+
+                    <v-tabs-window-item value="employer">
+                      <formRegister :select="select" @submitForm="isActive.value = false" />
+                    </v-tabs-window-item>
+                  </v-tabs-window>
+                </v-tabs-window-item>
+              </v-tabs-window>
             </div>
 
           </v-card>
         </template>
       </v-dialog>
-
+      <v-btn
+          v-else
+          class="bg-primary text-none text-body-1"
+          rounded="xl"
+          elevation="0"
+          :to="localePath(`/${authStore?.user?.userType}`)"
+      >
+        {{ $t('profile') }}
+      </v-btn>
     </v-container>
   </v-app-bar>
 

@@ -7,6 +7,23 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "types": ["node"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"],
+      "#app": ["./.nuxt/app"],
+      "#build": ["./.nuxt/build"],
+      "#imports": ["./.nuxt/imports"],
+      "#head": ["./.nuxt/head"],
+      "#i18n": ["./.nuxt/i18n"],
+      "#auth": ["./.nuxt/auth"],
+      "#components": ["./.nuxt/components"],
+      "#plugins": ["./.nuxt/plugins"],
+      "#utils": ["./.nuxt/utils"],
+      "#runtime-config": ["./.nuxt/runtime-config"],
+      "#vue": ["./node_modules/vue"],
+      "#vue-router": ["./node_modules/vue-router"]
+    }
   }
 }

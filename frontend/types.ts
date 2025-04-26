@@ -87,6 +87,28 @@ export enum CategoryDriveLicense {
 }
 
 // Interfaces
+export interface IUserBase {
+    id_user: number
+    email: string
+    password: string
+    notifications: string[]
+    userType: 'member' | 'employer'
+}
+
+export interface IUserMember extends IUserBase {
+    name: string
+    last_name: string
+    gender: 'man' | 'woman'
+    age: number
+    resume: IResume[] | null
+}
+
+export interface IUserEmployer extends IUserBase {
+    company: string
+    address: string
+    vacancies: IVacancy[] | null
+}
+
 export interface IVacancyBase {
     id: number
     slug: string
@@ -97,6 +119,9 @@ export interface IVacancyBase {
     currency: Currency
     company: string
     date_publish: string
+    email: string
+    id_user: number
+    userType: 'member' | 'employer'
 }
 
 export interface IVacancyCardSmall extends Omit<IVacancyBase, 'company' | 'date_publish'> {
@@ -139,6 +164,9 @@ export interface IResumeBase {
     avatar: string
     education_level: EducationLevel
     category: Category
+    email: string
+    id_user: number
+    userType: 'member' | 'employer'
 }
 
 export interface IResumeCardSmall extends Omit<IResumeBase, 'date_publish' | "category"> {

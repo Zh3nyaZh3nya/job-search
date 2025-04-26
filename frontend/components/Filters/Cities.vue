@@ -28,7 +28,7 @@ const city = computed<City | null>({
 <template>
   <div class="mx-4 cities-filters">
     <h2 class="text-h6">{{ $t('city') }}</h2>
-    <v-radio-group v-model="city" :hide-details="true" @change="handleCityChange">
+    <v-radio-group v-model="city" :hide-details="true">
       <v-row>
         <v-col cols="12" md="6">
           <v-radio

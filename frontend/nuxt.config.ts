@@ -1,16 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// @ts-ignore
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
+// @ts-ignore
 export default defineNuxtConfig({
   css: ['~/assets/styles/global.scss', 'vuetify/lib/styles/main.sass', "@/assets/fonts/fonts.css"],
   runtimeConfig: {
+    JWT_SECRET: 'd9f72e3a1a62b72914a6e6c238f60f267b9d8c191ef7b23829dc65552e9272d0',
     public: {
-      apiUrl: process.env.API_ENDPOINT ?? 'http://127.0.0.1:8000/api'
+      apiUrl: 'http://localhost:3000'
     }
   },
   build: {
     transpile: ['vuetify'],
   },
+  // @ts-ignore
   vuetify: {
     defaultAssets: {
       font: false,
@@ -20,9 +24,10 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     'vue-yandex-maps/nuxt',
     '@pinia/nuxt',
+    // @ts-ignore
     (_options, nuxt) => {
+      // @ts-ignore
       nuxt.hooks.hook('vite:extendConfig', (config) => {
-        // @ts-expect-error
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
@@ -56,8 +61,14 @@ export default defineNuxtConfig({
     dirs: [
       'composables',
       'composables/*/index.{ts,js,mjs,mts}',
-      'composables/**'
+      'composables/**',
+      'store',
+      'store/*/index.{ts,js,mjs,mts}',
+      'store/**',
     ]
+  },
+  routeRules: {
+    '/api/user': { middleware: ['auth'] },
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },

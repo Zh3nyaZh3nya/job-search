@@ -1,0 +1,38 @@
+[
+  {
+    "email": "test@asd.asd",
+    "passwordHash": "$2b$10$V0mW3PG9BnbnRaNWRuRSceVZf.ygo4Dv5RsrVSyp6nehhYaKqzCi.",
+    "notifications": [],
+    "userType": "employer",
+    "company": "123",
+    "address": "123"
+  },
+  {
+    "email": "ktngbotskz@test.kz",
+    "passwordHash": "$2b$10$Ro/nUlo/ND6k4Dsmpx7WF.Os/YRQ1dZ3DmvNw.dCXIVcXpFkJKYQK",
+    "notifications": [],
+    "name": "tet",
+    "userType": "member",
+    "last_name": "tet",
+    "gender": "man",
+    "age": "32"
+  },
+  {
+    "email": "test@g.kz",
+    "passwordHash": "$2b$10$4tWF89OcOzoqwWv47/mqmOxCUPUQRH5jtW.NE2/h.rJ7KrCceQ/lO",
+    "notifications": [],
+    "userType": "employer",
+    "company": "123123",
+    "address": "123"
+  },
+  {
+    "email": "member@gmail.com",
+    "passwordHash": "$2b$10$4EG82ak.nAgCgkaGbKOFReCUc8m86cOQ23HH5FS7KXi8xJgjY0uPm",
+    "notifications": [],
+    "name": "MemberName",
+    "userType": "member",
+    "last_name": "MemberLastname",
+    "gender": "man",
+    "age": "22"
+  }
+]

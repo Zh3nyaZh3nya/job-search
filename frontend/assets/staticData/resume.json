@@ -496,6 +496,58 @@
         ],
         "category_drive_license": []
       }
+    },
+    {
+      "email": "member@gmail.com",
+      "id": 11,
+      "title": "HR-менеджер",
+      "slug": "hr-manager",
+      "from_salary": 2000,
+      "to_salary": 3500,
+      "currency": "€",
+      "work_experience": "2 года",
+      "date_publish": "2025-01-10",
+      "avatar": "mdi-account-circle-outline",
+      "education_level": "HIGHER",
+      "category": "HR",
+      "info_resume": {
+        "conditions": [
+          "FULL_TIME"
+        ],
+        "removal": true,
+        "business_trip": false,
+        "gender": "WOMEN",
+        "age": 29,
+        "city": "PETROPAVLOVSK",
+        "work_experience": [
+          {
+            "date_from": "2021-01-01",
+            "date_to": "2024-12-31",
+            "title": "HR-менеджер",
+            "category": "HR",
+            "company": "Global HR Solutions",
+            "desc_experience": "Подбор персонала, организация тренингов и адаптация сотрудников."
+          }
+        ],
+        "education": [
+          {
+            "date_from": "2016-09-01",
+            "place": "Казахстанский университет менеджмента",
+            "professional": "Управление персоналом"
+          }
+        ],
+        "professional_skills": [
+          "Подбор персонала",
+          "Адаптация сотрудников",
+          "Организация мероприятий"
+        ],
+        "personal_skills": "Коммуникабельность, ответственность, энергичность.",
+        "lang": [
+          "Русский",
+          "Английский"
+        ],
+        "category_drive_license": []
+      }
     }
   ]
 }
