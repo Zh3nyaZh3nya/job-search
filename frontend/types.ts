@@ -139,8 +139,8 @@ export interface IVacancy extends IVacancyBase {
         internship: boolean
         work_experience: WorkExperience
     }
-    professional_skills: string[]
-    personal_skills: string[]
+    professional_skills: string
+    personal_skills: string
     city: City
     address: string
 }
@@ -160,7 +160,7 @@ export interface IResumeBase {
     slug: string
     from_salary: number | null
     currency: string | null
-    work_experience: string
+    work_experience: number
     date_publish: string
     avatar: string
     education_level: EducationLevel
@@ -196,9 +196,9 @@ export interface IResume extends IResumeBase {
             place: string
             professional: string
         }[]
-        professional_skills: string[]
+        professional_skills: string
         personal_skills: string
-        lang: string[]
+        lang: string
         category_drive_license: CategoryDriveLicense[]
     }
 }

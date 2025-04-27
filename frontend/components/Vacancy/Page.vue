@@ -55,15 +55,11 @@ const props = defineProps<IProps>()
                 <h4 class="text-h5 font-weight-bold">{{ $t('professional_skills') }}</h4>
               </v-col>
               <v-col cols="12" sm="9" class="py-1 py-md-4">
-                <ul class="d-flex flex-wrap ga-0 ga-sm-2">
-                  <li
-                      v-for="(str, index) in card.professional_skills"
-                      :key="str"
-                      class="text-primary text-h6 font-weight-regular"
-                  >
-                    {{ str }};
-                  </li>
-                </ul>
+                <p
+                    class="text-primary text-h6 font-weight-regular"
+                >
+                  {{ card.professional_skills }};
+                </p>
               </v-col>
             </v-row>
           </v-col>

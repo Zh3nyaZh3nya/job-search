@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLocalePath } from "#i18n";
+import { getYearLabel } from "~/utils/getYearLabel";
 import type { IResumeCardSmall } from "~/types";
 
 interface IProps {
@@ -24,7 +25,7 @@ const localePath = useLocalePath()
       <h3 class="text-caption text-grey mb-1">{{ $t(`educationLevel.${card.education_level}`) }}</h3>
       <h2 class="text-h6 lh-normal font-weight-regular">{{ card.title }}</h2>
       <h4 class="text-h6 text-primary font-weight-regular" v-if="card.from_salary && card.currency">{{ $t('from') }} {{ card.from_salary + card.currency }}</h4>
-      <h5 class="text-subtitle-1 text-grey">{{ card.work_experience }}</h5>
+      <h5 class="text-subtitle-1 text-grey">{{ card.work_experience }} {{ getYearLabel(card.work_experience) }}</h5>
     </header>
     <footer>
       <div class="mx-4">

@@ -58,7 +58,7 @@ const props = defineProps<IProps>()
             </div>
             <div class="mb-1 info-vacancy-types d-flex align-start">
               <label class="text-grey">{{ $t('work_experience_text') }}</label>
-              <p>{{ card.work_experience }}</p>
+              <p>{{ card.work_experience }} {{ getYearLabel(card.work_experience) }}</p>
             </div>
             <div class="mb-1 info-vacancy-types d-flex align-start">
               <label class="text-grey">{{ $t('business_trip') }}</label>
@@ -96,7 +96,7 @@ const props = defineProps<IProps>()
           <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('professional_skills') }}:</h5>
         </div>
         <div class="d-flex flex-wrap ga-0 ga-sm-1 text-h6 font-weight-regular">
-          <p v-for="skill in card.info_resume.professional_skills" :key="skill">{{ skill }};</p>
+          <p>{{ card.info_resume.personal_skills }};</p>
         </div>
       </div>
       <v-divider class="mb-2"></v-divider>
@@ -114,7 +114,7 @@ const props = defineProps<IProps>()
           <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('know_lang') }}:</h5>
         </div>
         <div class="d-flex ga-1 text-h6 font-weight-regular">
-          <p v-for="lang in card.info_resume.lang" :key="lang">{{ lang }};</p>
+          <p>{{ card.info_resume.lang }};</p>
         </div>
       </div>
       <v-divider class="mb-2" v-if="card.info_resume.category_drive_license.length"></v-divider>

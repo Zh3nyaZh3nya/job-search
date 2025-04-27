@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useLocalePath } from "#i18n";
 import type { IResumeCard } from "~/types";
+import {getYearLabel} from "~/utils/getYearLabel";
 
 interface IProps {
   card: IResumeCard
@@ -28,9 +29,10 @@ const localePath = useLocalePath()
         class="d-flex justify-space-between ga-4 pr-md-0"
       >
         <v-icon :icon="card.avatar" size="80" color="primary"></v-icon>
-        <div v-if="profile" class="d-flex d-md-none">
-          <v-icon icon="mdi-pencil-outline" size="20px"></v-icon>
-          <v-icon></v-icon>
+        <div v-if="profile" class="d-flex d-md-none ga-2 mt-2">
+          <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/edit-resume/${card.id}`))"></v-icon>
+          <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click=""></v-icon>
+          <v-icon icon="mdi-information-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/resume/${card.id}`))"></v-icon>
         </div>
       </v-col>
       <v-col
@@ -52,13 +54,13 @@ const localePath = useLocalePath()
                 </h3>
               </div>
               <div v-if="profile" class="d-none d-md-flex ga-2 mt-2">
-                <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click=""></v-icon>
+                <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/edit-resume/${card.id}`))"></v-icon>
                 <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click=""></v-icon>
                 <v-icon icon="mdi-information-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/resume/${card.id}`))"></v-icon>
               </div>
             </div>
             <h3 class="font-weight-regular text-body-2 text-primary mb-1">{{ $t(`category.${card.category}`) }}</h3>
-            <h4 class="font-weight-regular text-body-2">{{ card.work_experience }}</h4>
+            <h4 class="font-weight-regular text-body-2">{{ card.work_experience }} {{ getYearLabel(card.work_experience) }}</h4>
           </header>
           <main class="mb-6">
             <div class="d-flex align-center flex-wrap ga-2 ga-sm-4 mb-2">

@@ -25,20 +25,23 @@ export default defineEventHandler(async (event) => {
         }
 
         const resumeRaw = await fs.readFile(RESUME_FILE, 'utf-8')
-        const resumes = JSON.parse(resumeRaw)
+        const parsed = JSON.parse(resumeRaw)
+        const resumes = parsed.data
 
-        if (!resumes[email]) {
+        const resumeIndex = resumes.findIndex((resume: any) => resume.email === email)
+
+        if (resumeIndex === -1) {
             throw createError({ statusCode: 404, statusMessage: 'Resume not found' })
         }
 
-        resumes[email] = {
-            ...resumes[email],
+        resumes[resumeIndex] = {
+            ...resumes[resumeIndex],
             ...body,
         }
 
-        await fs.writeFile(RESUME_FILE, JSON.stringify(resumes, null, 2))
+        await fs.writeFile(RESUME_FILE, JSON.stringify({ data: resumes }, null, 2))
 
-        return { success: true, resume: resumes[email] }
+        return { success: true, resume: resumes[resumeIndex] }
     } catch (error: any) {
         console.error('Resume update error:', error)
         throw createError({
