@@ -51,10 +51,11 @@ const changeLanguage = (lang: LocaleCode): void => {
       class="py-2 text-white position-absolute"
       elevation="0"
       :class="isOpenBurger ? '' : 'bg-transparent'"
+      :style="isOpenBurger ? 'z-index: 2001' : ''"
   >
     <v-container class="d-flex">
       <nuxt-link :to="localePath('/')" class="mr-10 text-h4 link" :class="route.path !== localePath('/') ? 'text-black' : ''">
-        <span class="text-primary font-weight-bold">Search</span><span>Job</span>
+        <span class="text-primary font-weight-bold">Search</span><span :class="isOpenBurger ? 'text-black' : 'text-white'">Job</span>
       </nuxt-link>
       <ul class="d-none d-sm-flex align-center ga-4">
         <li v-for="item in menu" :key="item.link" class="link text-h6" :class="route.path !== localePath('/') ? 'text-black' : ''">
@@ -70,7 +71,7 @@ const changeLanguage = (lang: LocaleCode): void => {
           rounded="xl"
           elevation="0"
           @click="changeLanguage(locale === 'ru' ? locales[1].code : locales[0].code)"
-          :class="route.path !== localePath('/') ? 'text-black' : ''"
+          :class="route.path !== localePath('/') || isOpenBurger ? 'text-black' : ''"
       >
         {{ locale === 'ru' ? locales[1].name : locales[0].name }}
       </v-btn>
@@ -167,67 +168,71 @@ const changeLanguage = (lang: LocaleCode): void => {
       </v-btn>
     </v-container>
   </v-app-bar>
-  <v-navigation-drawer
-    v-model="isOpenBurger"
-    temporary
-    :scrim="false"
-    v-if="isOpenBurger"
-    class="w-100"
-    color="background"
+  <v-overlay
+      :model-value="isOpenBurger"
+      :scrim="false"
+      class="burger-overlay"
+      :content-class="'w-100 h-100'"
   >
-    <div class="d-flex flex-column justify-space-between h-100 mt-4">
-      <div class="mt-2 bg-white py-4" style="border-radius: 12px">
-        <ul class="align-center ga-4">
-          <li v-for="item in menu" :key="item.link" class="link text-h6" :class="route.path !== localePath('/') ? 'text-black' : ''">
-            <nuxt-link :to="localePath(item.link)" class="mx-4">
-              {{ $t(item.title) }}
-            </nuxt-link>
-            <v-divider color="primary" class="my-2" />
-          </li>
-        </ul>
-      </div>
-      <div class="mt-2 bg-white h-100 pt-4 pb-8 d-flex align-end" style="border-radius: 12px 12px 0 0">
-        <div class="mx-4 w-100">
-          <v-dialog max-width="500" v-if="!authStore.isAuthenticated">
-            <template v-slot:activator="{ props: activatorProps }">
-              <v-btn
-                  v-bind="activatorProps"
-                  class="bg-primary text-none text-h6"
-                  rounded="lg"
-                  elevation="0"
-                  block
-              >
-                {{ $t('enter') }}
-              </v-btn>
-            </template>
+    <v-navigation-drawer
+        v-model="isOpenBurger"
+        class="w-100 pt-4"
+        color="background"
+    >
+      <div class="d-flex flex-column justify-space-between h-100">
+        <div class="mt-2 bg-white py-4" style="border-radius: 12px">
+          <ul class="align-center ga-4">
+            <li v-for="item in menu" :key="item.link" class="link text-h6" :class="route.path !== localePath('/') ? 'text-black' : ''">
+              <nuxt-link :to="localePath(item.link)" class="mx-4">
+                {{ $t(item.title) }}
+              </nuxt-link>
+              <v-divider color="primary" class="my-2" />
+            </li>
+          </ul>
+        </div>
+        <div class="mt-2 bg-white h-100 pt-4 pb-8 d-flex align-end" style="border-radius: 12px 12px 0 0">
+          <div class="mx-4 w-100">
+            <v-dialog max-width="500" v-if="!authStore.isAuthenticated">
+              <template v-slot:activator="{ props: activatorProps }">
+                <v-btn
+                    v-bind="activatorProps"
+                    class="bg-primary text-none text-h6"
+                    rounded="lg"
+                    elevation="0"
+                    block
+                    size="large"
+                >
+                  {{ $t('enter') }}
+                </v-btn>
+              </template>
 
-            <template v-slot:default="{ isActive }">
-              <v-card rounded="lg" class="pa-4">
-                <div class="d-flex justify-center mb-4">
-                  <v-tabs
-                      v-model="tab"
-                      class="d-flex justify-center"
-                  >
-                    <v-tab value="auth" color="primary">{{ $t('auth') }}</v-tab>
-                    <v-tab value="register" color="primary">{{ $t('register') }}</v-tab>
-                  </v-tabs>
-                </div>
+              <template v-slot:default="{ isActive }">
+                <v-card rounded="lg" class="pa-4">
+                  <div class="d-flex justify-center mb-4">
+                    <v-tabs
+                        v-model="tab"
+                        class="d-flex justify-center"
+                    >
+                      <v-tab value="auth" color="primary">{{ $t('auth') }}</v-tab>
+                      <v-tab value="register" color="primary">{{ $t('register') }}</v-tab>
+                    </v-tabs>
+                  </div>
 
-                <div>
-                  <v-tabs-window v-model="tab">
-                    <v-tabs-window-item value="auth">
-                      <formLogin :select="select" />
-                    </v-tabs-window-item>
+                  <div>
+                    <v-tabs-window v-model="tab">
+                      <v-tabs-window-item value="auth">
+                        <formLogin :select="select" />
+                      </v-tabs-window-item>
 
-                    <v-tabs-window-item value="register">
-                      <div class="d-flex justify-center my-2">
-                        <v-select
-                            v-model="select"
-                            :label="tab === 'auth' ? $t('select-variant-enter') : $t('select-variant-register')"
-                            variant="outlined"
-                            rounded="lg"
-                            max-width="250px"
-                            :items="[
+                      <v-tabs-window-item value="register">
+                        <div class="d-flex justify-center my-2">
+                          <v-select
+                              v-model="select"
+                              :label="tab === 'auth' ? $t('select-variant-enter') : $t('select-variant-register')"
+                              variant="outlined"
+                              rounded="lg"
+                              max-width="250px"
+                              :items="[
                           {
                             title: $t('employer'),
                             value: 'employer'
@@ -237,46 +242,47 @@ const changeLanguage = (lang: LocaleCode): void => {
                             value: 'member'
                           }
                         ]"
-                            item-title="title"
-                            item-value="value"
-                            color="primary"
-                            :hide-details="true"
-                            :rules="[rules.required]"
-                        >
-                        </v-select>
-                      </div>
+                              item-title="title"
+                              item-value="value"
+                              color="primary"
+                              :hide-details="true"
+                              :rules="[rules.required]"
+                          >
+                          </v-select>
+                        </div>
 
-                      <v-tabs-window v-model="select">
-                        <v-tabs-window-item value="member">
-                          <formRegister :select="select" @submitForm="isActive.value = false" />
-                        </v-tabs-window-item>
+                        <v-tabs-window v-model="select">
+                          <v-tabs-window-item value="member">
+                            <formRegister :select="select" @submitForm="isActive.value = false" />
+                          </v-tabs-window-item>
 
-                        <v-tabs-window-item value="employer">
-                          <formRegister :select="select" @submitForm="isActive.value = false" />
-                        </v-tabs-window-item>
-                      </v-tabs-window>
-                    </v-tabs-window-item>
-                  </v-tabs-window>
-                </div>
+                          <v-tabs-window-item value="employer">
+                            <formRegister :select="select" @submitForm="isActive.value = false" />
+                          </v-tabs-window-item>
+                        </v-tabs-window>
+                      </v-tabs-window-item>
+                    </v-tabs-window>
+                  </div>
 
-              </v-card>
-            </template>
-          </v-dialog>
-          <v-btn
-              v-else
-              class="bg-primary text-none text-h6"
-              rounded="lg"
-              elevation="0"
-              size="large"
-              block
-              :to="localePath(`/${authStore?.user?.userType}`)"
-          >
-            {{ $t('profile') }}
-          </v-btn>
+                </v-card>
+              </template>
+            </v-dialog>
+            <v-btn
+                v-else
+                class="bg-primary text-none text-h6"
+                rounded="lg"
+                elevation="0"
+                size="large"
+                block
+                :to="localePath(`/${authStore?.user?.userType}`)"
+            >
+              {{ $t('profile') }}
+            </v-btn>
+          </div>
         </div>
       </div>
-    </div>
-  </v-navigation-drawer>
+    </v-navigation-drawer>
+  </v-overlay>
 </template>
 
 <style scoped>

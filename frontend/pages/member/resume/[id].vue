@@ -7,7 +7,6 @@ const store = useAuthStore()
 const route = useRoute()
 const localePath = useLocalePath()
 
-console.log(store.resume.find(item => item.id === route.params.id))
 const resume = computed(() => store.resume.find(item => item.id === Number(route.params.id)))
 </script>
 

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useApi } from '~/composables/useApi'
+import { navigateTo } from '#app'
 import type { IUserMember, IUserEmployer, IResume } from '~/types'
 
 type UserType = IUserEmployer | IUserMember
@@ -38,6 +39,8 @@ export const useAuthStore = defineStore('auth', {
                 await useApi('/api/auth/logout', { method: 'POST' })
                 this.user = null
                 this.loaded = false
+
+                await navigateTo('/', { redirectCode: 302 })
             } catch (e) {
                 console.error('User logout error:', e)
                 this.user = null
