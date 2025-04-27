@@ -8,7 +8,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 const USERS_FILE = path.resolve('assets/staticData/users.json')
-const JWT_SECRET = 'd9f72e3a1a62b72914a6e6c238f60f267b9d8c191ef7b23829dc65552e9272d0'
+const JWT_SECRET = useRuntimeConfig().JWT_SECRET
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)

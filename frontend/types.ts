@@ -122,6 +122,7 @@ export interface IVacancyBase {
     email: string
     id_user: number
     userType: 'member' | 'employer'
+    active: boolean
 }
 
 export interface IVacancyCardSmall extends Omit<IVacancyBase, 'company' | 'date_publish'> {
@@ -167,6 +168,7 @@ export interface IResumeBase {
     email: string
     id_user: number
     userType: 'member' | 'employer'
+    active: boolean
 }
 
 export interface IResumeCardSmall extends Omit<IResumeBase, 'date_publish' | "category"> {

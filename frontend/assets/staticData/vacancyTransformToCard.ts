@@ -24,6 +24,10 @@ export function vacancyTransformToCard(
             currency: vacancy.currency,
             job_format: vacancy.info_vacancy.job_format,
             education: vacancy.info_vacancy.education,
+            email: vacancy.email,
+            id_user: vacancy.id_user,
+            userType: 'employer',
+            active: vacancy.active
         })).slice(0, 3);
     } else {
         return vacancies.map((vacancy: IVacancy) => ({
@@ -42,6 +46,10 @@ export function vacancyTransformToCard(
             work_experience: vacancy.info_vacancy.work_experience,
             job_format: vacancy.info_vacancy.job_format,
             education_level: vacancy.info_vacancy.education,
+            email: vacancy.email,
+            id_user: vacancy.id_user,
+            userType: 'employer',
+            active: vacancy.active
         }));
     }
 }

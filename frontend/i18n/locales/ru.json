@@ -62,6 +62,8 @@
   "select-variant-enter": "Выберите вариант входа",
   "employer": "Работодатель",
   "members": "Работник",
+  "not-resume-title": "Резюме не найдено",
+  "not-resume-subtitle": "Создайте свое резюме, чтобы работодатели могли вас найти",
   "work_schedule": {
     "FULL_TIME": "Полный рабочий день",
     "PART_TIME": "Неполный рабочий день",

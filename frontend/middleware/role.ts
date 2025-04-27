@@ -1,4 +1,3 @@
-// middleware/role.ts
 import { defineNuxtRouteMiddleware, navigateTo } from 'nuxt/app'
 import { useAuthStore } from '~/store/auth'
 
@@ -15,7 +14,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
     } as const
 
     const cleanPath = getCleanPath(to.path)
-    const requiredRole = (cleanPath in roleRoutes) ? roleRoutes[cleanPath as keyof typeof roleRoutes] : undefined
+
+    const requiredRoleEntry = Object.entries(roleRoutes).find(([prefix]) => cleanPath.startsWith(prefix))
+    const requiredRole = requiredRoleEntry?.[1]
 
     if (requiredRole) {
         if (!auth.isAuthenticated) {
@@ -28,7 +29,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     }
 })
 
-function getCleanPath(path: string) {
+function getCleanPath(path: string): string {
     const parts = path.split('/')
     if (parts.length > 2 && ['kk', 'ru'].includes(parts[1])) {
         return '/' + parts.slice(2).join('/')

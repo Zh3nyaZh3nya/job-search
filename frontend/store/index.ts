@@ -29,12 +29,12 @@ interface RootState {
 
 export const useStore = defineStore("index", {
     state: (): RootState => ({
-        vacancy: staticData.vacancy,
-        vacancy_main: staticData.vacancyMain,
-        vacancy_card: staticData.vacancyCard,
-        resume: staticData.resume,
-        resume_main: staticData.resumeMain,
-        resume_card: staticData.resumeCard,
+        vacancy: staticData.vacancy.filter(item => item.active),
+        vacancy_main: staticData.vacancyMain.filter(item => item.active),
+        vacancy_card: staticData.vacancyCard.filter(item => item.active),
+        resume: staticData.resume.filter(item => item.active),
+        resume_main: staticData.resumeMain.filter(item => item.active),
+        resume_card: staticData.resumeCard.filter(item => item.active),
         filters: {
             city: null,
             work_schedule: null,
@@ -47,12 +47,12 @@ export const useStore = defineStore("index", {
     }),
     actions: {
         updateStateLocale(locale: string): void {
-            this.vacancy = staticData.vacancy;
-            this.vacancy_main = staticData.vacancyMain;
-            this.vacancy_card = staticData.vacancyCard;
-            this.resume = staticData.resume;
-            this.resume_main = staticData.resumeMain;
-            this.resume_card = staticData.resumeCard;
+            this.vacancy = staticData.vacancy.filter(item => item.active);
+            this.vacancy_main = staticData.vacancyMain.filter(item => item.active);
+            this.vacancy_card = staticData.vacancyCard.filter(item => item.active);
+            this.resume = staticData.resume.filter(item => item.active);
+            this.resume_main = staticData.resumeMain.filter(item => item.active);
+            this.resume_card = staticData.resumeCard.filter(item => item.active);
         },
     },
     getters: {

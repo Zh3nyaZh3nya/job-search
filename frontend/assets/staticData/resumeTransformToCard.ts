@@ -23,6 +23,10 @@ export function resumeTransformToCard(
             work_experience: resume.work_experience,
             avatar: resume.avatar,
             education_level: resume.education_level,
+            active: resume.active,
+            email: resume.email,
+            id_user: resume.id_user,
+            userType: 'member'
         })).slice(0, 4) as IResumeCardSmall[];
     } else {
         return resumes.map((resume: IResume) => ({
@@ -38,6 +42,10 @@ export function resumeTransformToCard(
             date_publish: resume.date_publish,
             city: resume.info_resume.city,
             to_salary: resume.to_salary,
+            active: resume.active,
+            email: resume.email,
+            id_user: resume.id_user,
+            userType: 'member'
         })) as IResumeCard[];
     }
 }

@@ -65,6 +65,7 @@
       "work_experience": "Без опыта",
       "date_publish": "2025-01-17",
       "avatar": "mdi-account-circle-outline",
+      "active": false,
       "education_level": "SECONDARY",
       "category": "SALES",
       "info_resume": {

@@ -4,6 +4,7 @@ import type { IResumeCard } from "~/types";
 
 interface IProps {
   card: IResumeCard
+  profile?: boolean
 }
 
 const props = defineProps<IProps>()
@@ -13,25 +14,54 @@ const localePath = useLocalePath()
 <template>
   <v-card
     v-if="card"
-    :to="localePath(`/resume/${card.id}/${card.slug}`)"
-    class="resume-card card pa-6"
-    :hover="true"
+    :to="profile ? undefined : localePath(`/resume/${card.id}/${card.slug}`)"
+    class="resume-card pa-4 pa-lg-6"
+    :hover="!profile"
+    :class="profile ? 'card-not-hover' : 'card'"
     elevation="0"
     rounded="xl"
   >
     <v-row>
-      <v-col cols="12" class="d-flex ga-4">
-        <div>
-          <v-icon :icon="card.avatar" size="80" color="primary"></v-icon>
+      <v-col
+        cols="12"
+        md="2"
+        class="d-flex justify-space-between ga-4 pr-md-0"
+      >
+        <v-icon :icon="card.avatar" size="80" color="primary"></v-icon>
+        <div v-if="profile" class="d-flex d-md-none">
+          <v-icon icon="mdi-pencil-outline" size="20px"></v-icon>
+          <v-icon></v-icon>
         </div>
-        <div>
+      </v-col>
+      <v-col
+        cols="12"
+        md="10"
+        class="pt-0 pt-md-4 pl-lg-0"
+      >
+        <div class="w-100">
           <header class="mb-2">
-            <h2 class="font-weight-bold">{{ card.title }}</h2>
+            <div class="d-flex align-start justify-space-between">
+              <div>
+                <h2 class="font-weight-bold ">{{ card.title }}</h2>
+                <h3
+                    v-if="profile"
+                    class="font-weight-regular"
+                    :class="card.active ? $t('text-success') : $t('text-error')"
+                >
+                  {{ card.active ? $t('active') : $t('not-active') }}
+                </h3>
+              </div>
+              <div v-if="profile" class="d-none d-md-flex ga-2 mt-2">
+                <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click=""></v-icon>
+                <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click=""></v-icon>
+                <v-icon icon="mdi-information-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/resume/${card.id}`))"></v-icon>
+              </div>
+            </div>
             <h3 class="font-weight-regular text-body-2 text-primary mb-1">{{ $t(`category.${card.category}`) }}</h3>
             <h4 class="font-weight-regular text-body-2">{{ card.work_experience }}</h4>
           </header>
           <main class="mb-6">
-            <div class="d-flex align-center ga-4 mb-2">
+            <div class="d-flex align-center flex-wrap ga-2 ga-sm-4 mb-2">
               <div class="d-flex align-center ga-2">
                 <v-icon icon="mdi-map-marker-outline" size="25"></v-icon>
                 <span>{{ $t(card.city) }}</span>
