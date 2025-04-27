@@ -13,6 +13,7 @@ const store = useStore()
           <v-col cols="12" md="4" lg="3">
             <FiltersMain />
           </v-col>
+
           <v-col cols="12" md="8" lg="9" v-if="store.GET_RESUME_CARD.length">
             <v-row>
               <v-col

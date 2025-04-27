@@ -31,7 +31,7 @@ const props = defineProps<IProps>()
       <div class="mb-2">
         <h2 class="text-h5 font-weight-bold mb-3">{{ $t('info-about-resume') }}</h2>
         <v-row>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="4" class="pb-0 pb-md-4">
             <div>
               <div class="mb-1 info-vacancy-types d-flex align-start">
                 <label class="text-grey">{{ $t('employment_type') }}</label>
@@ -51,7 +51,7 @@ const props = defineProps<IProps>()
               </div>
             </div>
           </v-col>
-          <v-col cols="12" md="5">
+          <v-col cols="12" md="5" class="pt-0 pt-md-4">
             <div class="mb-1 info-vacancy-types d-flex align-start">
               <label class="text-grey">{{ $t('education') }}</label>
               <p>{{ $t(`educationLevel.${card.education_level}`) }}</p>
@@ -70,7 +70,7 @@ const props = defineProps<IProps>()
       <v-divider class="mt-4 mb-2"></v-divider>
       <div class="mb-2">
         <h3 class="text-h5 font-weight-bold mb-3">{{ $t('labor_activity') }}</h3>
-        <div v-for="(exp, index) in card.info_resume.work_experience" :key="exp.title" class="d-flex">
+        <div v-for="(exp, index) in card.info_resume.work_experience" :key="exp.title" class="d-flex flex-column flex-md-row">
           <p class="text-secondary font-weight-medium mt-1" style="min-width: 300px">{{ $t('from')}} {{ exp.date_from }} {{ $t('to') }} {{ exp.date_to }} </p>
           <div>
             <p class="text-h6">{{ exp.title }}</p>
@@ -82,7 +82,7 @@ const props = defineProps<IProps>()
       <v-divider class="mt-4 mb-2"></v-divider>
       <div class="mb-2">
         <h4 class="text-h5 font-weight-bold mb-3">{{ $t('education') }}</h4>
-        <div v-for="(edc, index) in card.info_resume.education" :key="edc.place" class="d-flex">
+        <div v-for="(edc, index) in card.info_resume.education" :key="edc.place" class="d-flex flex-column flex-md-row">
           <p class="text-secondary font-weight-medium mt-1" style="min-width: 300px">{{ edc.date_from }}</p>
           <div>
             <p class="text-h6">{{ edc.place }}</p>
@@ -91,16 +91,16 @@ const props = defineProps<IProps>()
         </div>
       </div>
       <v-divider class="mt-4 mb-2"></v-divider>
-      <div class="mb-2 d-flex">
+      <div class="mb-2 d-flex flex-column flex-md-row">
         <div style="min-width: 300px">
           <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('professional_skills') }}:</h5>
         </div>
-        <div class="d-flex ga-1 text-h6 font-weight-regular">
+        <div class="d-flex flex-wrap ga-0 ga-sm-1 text-h6 font-weight-regular">
           <p v-for="skill in card.info_resume.professional_skills" :key="skill">{{ skill }};</p>
         </div>
       </div>
       <v-divider class="mb-2"></v-divider>
-      <div class="mb-2 d-flex">
+      <div class="mb-2 d-flex flex-column flex-md-row">
         <div style="min-width: 300px">
           <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('personal_skills') }}:</h5>
         </div>
@@ -109,7 +109,7 @@ const props = defineProps<IProps>()
         </div>
       </div>
       <v-divider class="mb-2"></v-divider>
-      <div class="d-flex" :class="card.info_resume.category_drive_license.length ? 'mb-2' : ''">
+      <div class="d-flex flex-column flex-md-row" :class="card.info_resume.category_drive_license.length ? 'mb-2' : ''">
         <div style="min-width: 300px">
           <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('know_lang') }}:</h5>
         </div>

@@ -31,7 +31,7 @@ const props = defineProps<IProps>()
       <div class="mb-2">
         <h2 class="text-h5 font-weight-bold mb-3">{{ $t('info-about-vacancy') }}</h2>
         <v-row>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="4" class="pb-0 pb-md-4">
             <div>
               <p class="mb-1 info-vacancy-types">
                 <label class="text-grey">{{ $t('employment_type') }}</label>
@@ -40,7 +40,7 @@ const props = defineProps<IProps>()
               <p class="mb-1 info-vacancy-types"><label class="text-grey">{{ $t('internship') }}</label> {{ card.info_vacancy.internship ? $t('yes') : $t('no') }}</p>
             </div>
           </v-col>
-          <v-col cols="12" md="5">
+          <v-col cols="12" md="5" class="pt-0 pt-md-4">
             <p class="mb-1 info-vacancy-types"><label class="text-grey">{{ $t('education') }}</label> {{ $t(`educationLevel.${card.info_vacancy.education}`) }}</p>
             <p class="mb-1 info-vacancy-types"><label class="text-grey">{{ $t('work_experience_text') }}</label> {{ $t(`work_experience.${card.info_vacancy.work_experience}`) }}</p>
           </v-col>
@@ -51,11 +51,11 @@ const props = defineProps<IProps>()
         <v-row>
           <v-col cols="12">
             <v-row>
-              <v-col cols="12" sm="3">
+              <v-col cols="12" sm="3" class="pb-1 pb-md-4">
                 <h4 class="text-h5 font-weight-bold">{{ $t('professional_skills') }}</h4>
               </v-col>
-              <v-col cols="12" sm="9">
-                <ul class="d-flex ga-2">
+              <v-col cols="12" sm="9" class="py-1 py-md-4">
+                <ul class="d-flex flex-wrap ga-0 ga-sm-2">
                   <li
                       v-for="(str, index) in card.professional_skills"
                       :key="str"
@@ -69,11 +69,11 @@ const props = defineProps<IProps>()
           </v-col>
           <v-col cols="12">
             <v-row>
-              <v-col cols="12" sm="3">
+              <v-col cols="12" sm="3" class="py-1 py-md-4">
                 <h4 class="text-h5 font-weight-bold">{{ $t('personal_skills') }}</h4>
               </v-col>
-              <v-col cols="12" sm="9">
-                <ul class="d-flex align-start ga-2">
+              <v-col cols="12" sm="9" class="pt-0 pt-md-4">
+                <ul class="d-flex flex-wrap align-start ga-0 ga-sm-2">
                   <li
                       v-for="(str, index) in card.personal_skills"
                       :key="str"
@@ -92,20 +92,20 @@ const props = defineProps<IProps>()
         <v-row>
           <v-col cols="12" class="pb-0">
             <v-row>
-              <v-col cols="12" sm="3">
+              <v-col cols="12" sm="3" class="pb-0 pb-md-4">
                 <h6 class="text-h5 font-weight-bold">{{ $t('region') }}</h6>
               </v-col>
-              <v-col cols="12" sm="9">
+              <v-col cols="12" sm="9" class="pt-0 pt-md-4">
                 <p class="text-h6 font-weight-regular">{{ $t(card.city) }}</p>
               </v-col>
             </v-row>
           </v-col>
           <v-col cols="12">
             <v-row>
-              <v-col cols="12" sm="3">
+              <v-col cols="12" sm="3" class="pb-0 pb-md-4">
                 <h6 class="text-h5 font-weight-bold">{{ $t('place_work') }}</h6>
               </v-col>
-              <v-col cols="12" sm="9">
+              <v-col cols="12" sm="9" class="pt-0 pt-md-4">
                 <p class="text-h6 font-weight-regular">{{ card.address }}</p>
               </v-col>
             </v-row>

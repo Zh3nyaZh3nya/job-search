@@ -29,7 +29,7 @@ const heroNumbers = ref<INumbers[]>([
 
     <Search class="mb-16" />
 
-    <div class="d-flex justify-center">
+    <div class="d-none d-sm-flex justify-center">
       <ul class="d-flex index__hero-numbers ga-16">
         <li class="index__hero-numbers-item text-white d-flex flex-column" v-for="item in heroNumbers" :key="item.numbers">
           <span class="d-inline-block font-weight-black text-h5">{{ item.numbers }}</span>

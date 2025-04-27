@@ -506,6 +506,7 @@
       "from_salary": 2000,
       "to_salary": 3500,
       "currency": "€",
+      "active": true,
       "work_experience": "2 года",
       "date_publish": "2025-01-10",
       "avatar": "mdi-account-circle-outline",

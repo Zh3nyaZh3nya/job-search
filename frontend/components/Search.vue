@@ -31,8 +31,8 @@ const selectItems = [
 </script>
 
 <template>
-  <v-sheet color="white" rounded="pill" width="100%" min-height="74px" elevation="12" class="d-flex align-center pa-3">
-    <v-form class="d-flex align-center w-100 ga-2">
+  <v-sheet color="white" width="100%" min-height="74px" elevation="12" class="sheet-search d-flex align-center pa-3">
+    <v-form class="d-none d-md-flex align-center w-100 ga-2">
       <v-select
           v-model="selectItem"
           :items="selectItems"
@@ -68,9 +68,54 @@ const selectItems = [
         {{ $t('search') }}
       </v-btn>
     </v-form>
+    <v-form class="d-flex flex-column d-md-none w-100 ga-2">
+      <div>
+        <v-text-field
+            :placeholder="$t('search_placeholder')"
+            :hide-details="true"
+            variant="solo"
+            elevation="0"
+            width="100%"
+            rounded="lg"
+            v-model="search"
+        />
+      </div>
+
+      <div class="d-flex ga-4 justify-end">
+        <v-select
+            v-model="selectItem"
+            :items="selectItems"
+            rounded="lg"
+            size="x-large"
+            variant="solo"
+            :hide-details="true"
+            max-width="220"
+        ></v-select>
+        <v-btn
+            rounded="lg"
+            class="text-none text-body-1"
+            size="x-large"
+            height="56px"
+            color="primary"
+            @click="$router.push(
+            {
+              path: '/search',
+              query: { type: selectItem, search: search }
+            }
+          )"
+        >
+          {{ $t('search') }}
+        </v-btn>
+      </div>
+    </v-form>
   </v-sheet>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+.sheet-search {
+  border-radius: 9999px;
+  @media(max-width: 960px) {
+    border-radius: 16px;
+  }
+}
 </style>

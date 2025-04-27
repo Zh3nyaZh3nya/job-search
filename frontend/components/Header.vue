@@ -55,7 +55,8 @@ const changeLanguage = (lang: LocaleCode): void => {
   >
     <v-container class="d-flex">
       <nuxt-link :to="localePath('/')" class="mr-10 text-h4 link" :class="route.path !== localePath('/') ? 'text-black' : ''">
-        <span class="text-primary font-weight-bold">Search</span><span :class="isOpenBurger ? 'text-black' : 'text-white'">Job</span>
+        <span class="text-primary font-weight-bold">Search</span>
+        <span :class="[route.path !== localePath('/') ? 'text-black' : '', isOpenBurger ? 'text-black' : '']">Job</span>
       </nuxt-link>
       <ul class="d-none d-sm-flex align-center ga-4">
         <li v-for="item in menu" :key="item.link" class="link text-h6" :class="route.path !== localePath('/') ? 'text-black' : ''">
@@ -71,7 +72,7 @@ const changeLanguage = (lang: LocaleCode): void => {
           rounded="xl"
           elevation="0"
           @click="changeLanguage(locale === 'ru' ? locales[1].code : locales[0].code)"
-          :class="route.path !== localePath('/') || isOpenBurger ? 'text-black' : ''"
+          :class="[route.path !== localePath('/') ? 'text-black' : '', isOpenBurger ? 'text-black' : '']"
       >
         {{ locale === 'ru' ? locales[1].name : locales[0].name }}
       </v-btn>

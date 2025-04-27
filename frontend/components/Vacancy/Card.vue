@@ -31,7 +31,7 @@ const localePath = useLocalePath()
         <v-icon icon="mdi-shield-check-outline" color="green" size="25"></v-icon>
         <span class="text-h6 font-weight-regular">{{ card.company }}</span>
       </div>
-      <div class="d-flex align-center ga-4 mb-2">
+      <div class="d-flex flex-wrap align-center ga-2 ga-sm-4 mb-2">
         <div class="d-flex align-center ga-2" v-if="card.city">
           <v-icon icon="mdi-map-marker-outline" size="25"></v-icon>
           <span class="text-subtitle-1">{{ $t(card.city) }}, {{ card.address }}</span>
@@ -41,7 +41,7 @@ const localePath = useLocalePath()
           <span class="text-subtitle-1">{{ $t(`work_experience.${card.work_experience}`) }}</span>
         </div>
       </div>
-      <div class="d-flex align-center ga-4">
+      <div class="d-flex align-center flex-wrap ga-2 ga-sm-4">
         <div class="d-flex align-center ga-2">
           <v-icon icon="mdi-clock-outline" size="24"></v-icon>
           <span>{{ $t(`work_schedule.${card.job_format}`)}}</span>
