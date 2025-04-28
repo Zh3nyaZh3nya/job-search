@@ -23,8 +23,7 @@ const localePath = useLocalePath()
       <h2 class="font-weight-bold text-h5">{{ card.title }}</h2>
       <h3 class="font-weight-regular text-subtitle-1">{{ card.post }}</h3>
       <h4 class="font-weight-regular text-body-1 text-primary">{{ $t(`category.${card.category}`) }}</h4>
-      <h5 class="font-weight-regular text-h4 text-primary lh-normal" v-if="card.to_salary">{{ $t('from')}} {{ card.from_salary }} {{ $t('to') }} {{ card.to_salary }} {{ card.currency }}</h5>
-      <h5 class="font-weight-regular text-h4 text-primary lh-normal" v-else>{{ card.from_salary }} {{ card.currency }}</h5>
+      <h5 class="font-weight-regular text-h4 text-primary lh-normal">{{ card.from_salary }} {{ card.currency }}</h5>
     </header>
     <main class="mb-6">
       <div class="d-flex align-center ga-2 mb-2">

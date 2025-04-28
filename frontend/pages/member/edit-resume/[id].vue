@@ -11,9 +11,9 @@ const resume = computed(() => store.resume.find(item => item.id === Number(route
 </script>
 
 <template>
-  <v-main>
+  <v-main v-if="resume">
     <section>
-      <v-container v-if="resume">
+      <v-container>
         <v-btn
             variant="text"
             class="text-none px-0 text-h6 font-weight-regular link mb-4"
@@ -29,8 +29,9 @@ const resume = computed(() => store.resume.find(item => item.id === Number(route
       </v-container>
     </section>
     <section>
-      <v-container v-if="resume">
+      <v-container>
         <ResumeEdit :card="resume" />
+
       </v-container>
     </section>
   </v-main>

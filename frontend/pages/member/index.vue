@@ -7,7 +7,18 @@ const { user, resume } = storeToRefs(authStore)
 const { fetchUserResumes } = authStore
 const localePath = useLocalePath()
 
+const openDialogRemove = ref<boolean>(false)
+const removeIndexResume = ref<number | null>(null)
+
 await fetchUserResumes()
+
+async function confirmRemove() {
+  if(removeIndexResume.value === null) return
+
+  await authStore.deleteUserResume(resume.value[removeIndexResume.value].id)
+  removeIndexResume.value = null
+  openDialogRemove.value = false
+}
 
 const memberUser = computed(() => {
   if (user.value?.userType === 'member') {
@@ -31,15 +42,35 @@ definePageMeta({
               cols="12"
               md="8"
           >
-            <v-row v-if="resume.length">
-              <v-col
-                  v-for="item in resumeTransformToCard(resume, 'usually')"
-                  :key="item.title"
-                  cols="12"
-              >
-                <ResumeCard :card="item" :profile="true" />
-              </v-col>
-            </v-row>
+            <div v-if="resume.length">
+              <v-row>
+                <v-col
+                    v-for="(item, index) in resumeTransformToCard(resume, 'usually')"
+                    :key="item.title"
+                    cols="12"
+                >
+                  <ResumeCard :card="item" :profile="true" @remove-card="openDialogRemove = !openDialogRemove, removeIndexResume = index" />
+                </v-col>
+
+              </v-row>
+              <div class="d-flex justify-center">
+                <v-btn
+                    color="primary"
+                    elevation="0"
+                    class="mt-2 text-none text-h6"
+                    min-width="0"
+                    :to="localePath('/create-resume')"
+                    size="large"
+                >
+                  <div class="d-flex align-center ga-2">
+                    <p>{{ $t('add') }}</p>
+                    <v-icon icon="mdi-plus-circle-outline" size="18"></v-icon>
+                  </div>
+
+                </v-btn>
+              </div>
+            </div>
+
             <div v-else class="text-h5">
               <p>{{ $t('not-resume-title') }}</p>
               <p>{{ $t('not-resume-subtitle') }}</p>
@@ -48,7 +79,7 @@ definePageMeta({
                   elevation="0"
                   class="mt-2 text-none px-0 py-0 text-h6"
                   min-width="0"
-                  :to="localePath('/create-resume')"
+                  :to="localePath('/member/create-resume')"
                   size="large"
                   variant="text"
               >
@@ -90,6 +121,16 @@ definePageMeta({
         </v-row>
       </v-container>
     </section>
+
+    <v-dialog v-model="openDialogRemove" max-width="500">
+      <v-card class="pa-4 rounded-lg">
+        <p class="text-h6 text-center mb-4">{{ $t('edit-dialog-remove-title') }}</p>
+        <div class="d-flex justify-center ga-4">
+          <v-btn color="primary" @click="confirmRemove">{{ $t('confirm') }}</v-btn>
+          <v-btn color="error" @click="openDialogRemove = false">{{ $t('cancel') }}</v-btn>
+        </div>
+      </v-card>
+    </v-dialog>
   </v-main>
 </template>
 

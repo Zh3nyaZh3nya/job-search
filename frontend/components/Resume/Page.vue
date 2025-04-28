@@ -25,8 +25,7 @@ const props = defineProps<IProps>()
       <span class="text-body-2 text-grey">{{ $t('publish') }} {{ card.date_publish }}</span>
       <h1 class="mb-1 text-h5 font-weight-bold">{{ card.title }}</h1>
       <h3 class="text-grey text-body-1 mb-2">{{ $t(`category.${card.category}`) }}</h3>
-      <p v-if="!card.to_salary" class="text-primary text-h4 mb-1">{{ card.from_salary }}{{ card.currency }}</p>
-      <p v-else class="mb-1 text-primary text-h4">{{ $t('from')}} {{ card.from_salary }} {{ $t('to') }} {{ card.to_salary }}{{ card.currency }}</p>
+      <p class="text-primary text-h4 mb-1">{{ card.from_salary }}{{ card.currency }}</p>
       <v-divider class="my-2"></v-divider>
       <div class="mb-2">
         <h2 class="text-h5 font-weight-bold mb-3">{{ $t('info-about-resume') }}</h2>

@@ -159,7 +159,7 @@ export interface IResumeBase {
     title: string
     slug: string
     from_salary: number | null
-    currency: string | null
+    currency: string
     work_experience: number
     date_publish: string
     avatar: string
@@ -175,7 +175,6 @@ export interface IResumeCardSmall extends Omit<IResumeBase, 'date_publish' | "ca
 }
 
 export interface IResume extends IResumeBase {
-    to_salary: number | null
     info_resume: {
         conditions: (EmploymentType | WorkSchedule)[];
         removal: boolean
@@ -205,5 +204,4 @@ export interface IResume extends IResumeBase {
 
 export interface IResumeCard extends IResumeBase {
     city: City
-    to_salary: number | null
 }

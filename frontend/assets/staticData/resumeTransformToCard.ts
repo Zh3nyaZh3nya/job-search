@@ -41,7 +41,6 @@ export function resumeTransformToCard(
             category: resume.category,
             date_publish: resume.date_publish,
             city: resume.info_resume.city,
-            to_salary: resume.to_salary,
             active: resume.active,
             email: resume.email,
             id_user: resume.id_user,

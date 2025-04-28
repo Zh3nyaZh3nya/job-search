@@ -9,8 +9,9 @@ const { locale } = useI18n()
 
 await authStore.fetchUser()
 
-watch(() => locale.value, (newLocale) => {
-  store.updateStateLocale(newLocale);
+watch(() => locale.value, async (newLocale) => {
+  await store.fetchResume()
+  await store.fetchVacancy()
 }, { immediate: true });
 </script>
 

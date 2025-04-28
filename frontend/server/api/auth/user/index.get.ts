@@ -1,4 +1,3 @@
-// server/api/me.ts
 import { defineEventHandler, createError } from 'h3'
 import { promises as fs } from 'fs'
 // @ts-ignore

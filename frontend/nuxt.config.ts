@@ -1,9 +1,42 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // @ts-ignore
+import { defineNuxtConfig } from 'nuxt/config'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { copyFile, mkdir, readdir, stat } from 'fs/promises'
+import { join, dirname } from 'path'
+
+async function copyStaticData() {
+  const fromDir = join(process.cwd(), 'assets/staticData')
+  const toDir = join(process.cwd(), '.output/assets/staticData')
+
+  async function copyRecursive(src: string, dest: string) {
+    const entries = await readdir(src, { withFileTypes: true })
+
+    for (const entry of entries) {
+      const srcPath = join(src, entry.name)
+      const destPath = join(dest, entry.name)
+
+      if (entry.isDirectory()) {
+        await mkdir(destPath, { recursive: true })
+        await copyRecursive(srcPath, destPath)
+      } else {
+        await mkdir(dirname(destPath), { recursive: true })
+        await copyFile(srcPath, destPath)
+      }
+    }
+  }
+
+  await mkdir(toDir, { recursive: true })
+  await copyRecursive(fromDir, toDir)
+}
 
 // @ts-ignore
 export default defineNuxtConfig({
+  hooks: {
+    'nitro:build:public-assets': async () => {
+      await copyStaticData()
+    }
+  },
   css: ['~/assets/styles/global.scss', 'vuetify/lib/styles/main.sass', "@/assets/fonts/fonts.css"],
   runtimeConfig: {
     JWT_SECRET: 'd9f72e3a1a62b72914a6e6c238f60f267b9d8c191ef7b23829dc65552e9272d0',
@@ -68,7 +101,7 @@ export default defineNuxtConfig({
     ]
   },
   routeRules: {
-    '/api/user': { middleware: ['auth'] },
+    '/api/auth/user': { middleware: ['auth'] },
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },

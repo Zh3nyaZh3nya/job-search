@@ -1,11 +1,11 @@
+import { defineEventHandler, readBody, createError } from 'h3'
+// @ts-ignore
+import { useRuntimeConfig } from '#imports'
 import fs from 'fs'
 import path from 'path'
-import { defineEventHandler, readBody, createError } from 'h3'
-import { useRuntimeConfig } from '#imports'
 import jwt from 'jsonwebtoken'
 
 export default defineEventHandler(async (event) => {
-    // Получаем токен из cookie
     const token = event.node.req.headers.cookie
         ?.split('; ')
         .find(row => row.startsWith('auth_token='))
@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const newResume = await readBody(event)
-    newResume.userEmail = user.email // ← привязываем к пользователю
+    newResume.userEmail = user.email
 
     const filePath = path.resolve('assets/staticData/resume.json')
 

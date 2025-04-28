@@ -9,7 +9,7 @@ const authStore = useAuthStore()
 const { data: userData } = await useAsyncData('userData', async () => {
   try {
     if(!authStore.isAuthenticated) return
-    const { data } = await useApi<{ user: IUserEmployer }>('/api/user', { method: 'GET' })
+    const { data } = await useApi<{ user: IUserEmployer }>('/api/auth/user', { method: 'GET' })
     const user = data?.value?.user as IUserEmployer | null
 
     if(user) {

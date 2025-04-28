@@ -3,20 +3,21 @@
     {
       "email": "member@gmail.com",
       "id": 11,
-      "title": "HR-менеджер-test",
-      "slug": "hr-менеджер-test",
+      "title": "HR-менеджер-test-267",
+      "slug": "hr-менеджер-test-267",
       "from_salary": 2000,
-      "to_salary": 3500,
       "currency": "€",
       "active": true,
       "work_experience": 2,
-      "date_publish": "2025-04-27",
+      "date_publish": "2025-04-28",
       "avatar": "mdi-account-circle-outline",
       "education_level": "HIGHER",
-      "category": "HR",
+      "category": "TRANSPORT",
       "info_resume": {
         "conditions": [
-          "REMOTE"
+          "REMOTE",
+          "ROTATIONAL",
+          "PIECEWORK"
         ],
         "removal": false,
         "business_trip": false,

@@ -10,6 +10,7 @@ interface IProps {
 
 const props = defineProps<IProps>()
 const localePath = useLocalePath()
+const emit = defineEmits(['removeCard'])
 </script>
 
 <template>
@@ -31,7 +32,7 @@ const localePath = useLocalePath()
         <v-icon :icon="card.avatar" size="80" color="primary"></v-icon>
         <div v-if="profile" class="d-flex d-md-none ga-2 mt-2">
           <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/edit-resume/${card.id}`))"></v-icon>
-          <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click=""></v-icon>
+          <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click="emit('removeCard')"></v-icon>
           <v-icon icon="mdi-information-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/resume/${card.id}`))"></v-icon>
         </div>
       </v-col>
@@ -55,7 +56,7 @@ const localePath = useLocalePath()
               </div>
               <div v-if="profile" class="d-none d-md-flex ga-2 mt-2">
                 <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/edit-resume/${card.id}`))"></v-icon>
-                <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click=""></v-icon>
+                <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click="emit('removeCard')"></v-icon>
                 <v-icon icon="mdi-information-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/member/resume/${card.id}`))"></v-icon>
               </div>
             </div>
@@ -70,8 +71,7 @@ const localePath = useLocalePath()
               </div>
               <div class="d-flex align-center ga-2 text-primary">
                 <v-icon icon="mdi-cash-multiple" size="25"></v-icon>
-                <span v-if="!card.to_salary">{{ card.from_salary }}{{ card.currency }}</span>
-                <span v-else>{{ $t('from')}} {{ card.from_salary }} {{ $t('to') }} {{ card.to_salary }}{{ card.currency }}</span>
+                <span>{{ card.from_salary }}{{ card.currency }}</span>
               </div>
             </div>
             <div class="d-flex align-center ga-4">

@@ -1,0 +1,48 @@
+import { defineEventHandler, readBody, createError } from 'h3'
+// @ts-ignore
+import { useRuntimeConfig } from '#imports'
+import { promises as fs } from 'fs'
+import jwt from 'jsonwebtoken'
+import path from 'path'
+
+export default defineEventHandler(async (event) => {
+    const token = event.node.req.headers.cookie
+        ?.split('; ')
+        .find(row => row.startsWith('auth_token='))
+        ?.split('=')[1]
+
+    if (!token) {
+        throw createError({ statusCode: 401, statusMessage: 'Unauthorized (no token)' })
+    }
+
+    let user
+    try {
+        const config = useRuntimeConfig()
+        user = jwt.verify(token, config.JWT_SECRET)
+    } catch (err) {
+        throw createError({ statusCode: 401, statusMessage: 'Invalid token' })
+    }
+
+    const newResume = await readBody(event)
+    newResume.userEmail = user.email
+
+    const filePath = path.resolve('assets/staticData/resume.json')
+
+    let resumes = { data: [] }
+    try {
+        const fileContent = await fs.readFile(filePath, 'utf-8')
+        resumes = JSON.parse(fileContent)
+    } catch (e) {
+        console.warn('resume.json не найден или пуст, создаю новый файл...')
+    }
+
+    resumes.data.push(newResume)
+
+    await fs.writeFile(filePath, JSON.stringify(resumes, null, 2), 'utf-8')
+
+    return {
+        success: true,
+        total: resumes.data.length,
+        user: user.email
+    }
+})

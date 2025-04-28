@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { useStore } from "~/store";
+import { useAsyncData } from "nuxt/app";
 
 const store = useStore()
+
+const { data } = await useAsyncData('resumeGet', async () => {
+  await store.fetchResume()
+})
 </script>
 
 <template>

@@ -1,13 +1,17 @@
-import { staticData } from "assets/staticData";
 import { defineStore } from "pinia";
 import {
     Category, City, Currency, EducationLevel,
     EmploymentType, WorkExperience, WorkSchedule
 } from "~/types";
+import { useApi } from "~/composables/useApi";
+import { resumeTransformToCard } from "~/assets/staticData/resumeTransformToCard";
+import { vacancyTransformToCard } from "~/assets/staticData/vacancyTransformToCard";
 import type {
     IVacancy, IVacancyCardSmall, IResume, IResumeCardSmall,
     IVacancyCard, IResumeCard
 } from "~/types";
+import {slugify} from "~/utils/slugify";
+import {formatDate} from "~/utils/formatDate";
 
 interface RootState {
     vacancy: IVacancy[]
@@ -29,12 +33,12 @@ interface RootState {
 
 export const useStore = defineStore("index", {
     state: (): RootState => ({
-        vacancy: staticData.vacancy.filter(item => item.active),
-        vacancy_main: staticData.vacancyMain.filter(item => item.active),
-        vacancy_card: staticData.vacancyCard.filter(item => item.active),
-        resume: staticData.resume.filter(item => item.active),
-        resume_main: staticData.resumeMain.filter(item => item.active),
-        resume_card: staticData.resumeCard.filter(item => item.active),
+        vacancy: [],
+        vacancy_main: [],
+        vacancy_card: [],
+        resume: [],
+        resume_main: [],
+        resume_card: [],
         filters: {
             city: null,
             work_schedule: null,
@@ -46,13 +50,47 @@ export const useStore = defineStore("index", {
         }
     }),
     actions: {
-        updateStateLocale(locale: string): void {
-            this.vacancy = staticData.vacancy.filter(item => item.active);
-            this.vacancy_main = staticData.vacancyMain.filter(item => item.active);
-            this.vacancy_card = staticData.vacancyCard.filter(item => item.active);
-            this.resume = staticData.resume.filter(item => item.active);
-            this.resume_main = staticData.resumeMain.filter(item => item.active);
-            this.resume_card = staticData.resumeCard.filter(item => item.active);
+        async fetchResume() {
+            try {
+                const { data } = await useApi<{ resume: { data: IResume[] } }>('/api/resume', { method: 'GET', credentials: 'include' })
+                const { resume } = data?.value
+
+                this.resume = resume
+                this.resume_main = resumeTransformToCard(resume, 'small')
+                this.resume_card = resumeTransformToCard(resume, 'usually')
+            } catch (e) {
+                console.error(e)
+                this.resume = []
+                this.resume_main = []
+                this.resume_card = []
+            }
+        },
+
+        async editResume(data: IResume) {
+            try {
+                await useApi('/api/resume/edit', {
+                    method: 'POST',
+                    body: data
+                })
+            } catch (e) {
+                console.log(e)
+            }
+        },
+
+        async fetchVacancy() {
+            try {
+                const { data } = await useApi<{ resume: { data: IVacancy[] } }>('/api/vacancy', { method: 'GET', credentials: 'include' })
+                const { vacancy } = data?.value
+
+                this.vacancy = vacancy
+                this.vacancy_main = vacancyTransformToCard(vacancy, 'small')
+                this.vacancy_card = vacancyTransformToCard(vacancy, 'usually')
+            } catch (e) {
+                console.error(e)
+                this.vacancy = []
+                this.vacancy_main = []
+                this.vacancy_card = []
+            }
         },
     },
     getters: {
