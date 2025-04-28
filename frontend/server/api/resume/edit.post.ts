@@ -1,48 +1,52 @@
-import { defineEventHandler, readBody, createError } from 'h3'
-// @ts-ignore
-import { useRuntimeConfig } from '#imports'
+import { defineEventHandler, readBody, getCookie, createError } from 'h3'
 import { promises as fs } from 'fs'
-import jwt from 'jsonwebtoken'
 import path from 'path'
+import jwt from 'jsonwebtoken'
+
+const RESUME_FILE = path.resolve('assets/staticData/resume.json')
+const JWT_SECRET = 'd9f72e3a1a62b72914a6e6c238f60f267b9d8c191ef7b23829dc65552e9272d0'
 
 export default defineEventHandler(async (event) => {
-    const token = event.node.req.headers.cookie
-        ?.split('; ')
-        .find(row => row.startsWith('auth_token='))
-        ?.split('=')[1]
-
-    if (!token) {
-        throw createError({ statusCode: 401, statusMessage: 'Unauthorized (no token)' })
-    }
-
-    let user
     try {
-        const config = useRuntimeConfig()
-        user = jwt.verify(token, config.JWT_SECRET)
-    } catch (err) {
-        throw createError({ statusCode: 401, statusMessage: 'Invalid token' })
-    }
+        const token = getCookie(event, 'auth_token')
+        if (!token) {
+            throw createError({ statusCode: 401, statusMessage: 'Unauthorized' })
+        }
 
-    const newResume = await readBody(event)
-    newResume.userEmail = user.email
+        const decoded = jwt.verify(token, JWT_SECRET) as { email: string }
+        const email = decoded.email
+        if (!email) {
+            throw createError({ statusCode: 400, statusMessage: 'Invalid token payload' })
+        }
 
-    const filePath = path.resolve('assets/staticData/resume.json')
+        const body = await readBody(event)
+        if (!body || typeof body !== 'object') {
+            throw createError({ statusCode: 400, statusMessage: 'Invalid body' })
+        }
 
-    let resumes = { data: [] }
-    try {
-        const fileContent = await fs.readFile(filePath, 'utf-8')
-        resumes = JSON.parse(fileContent)
-    } catch (e) {
-        console.warn('resume.json не найден или пуст, создаю новый файл...')
-    }
+        const resumeRaw = await fs.readFile(RESUME_FILE, 'utf-8')
+        const parsed = JSON.parse(resumeRaw)
+        const resumes = parsed.data
 
-    resumes.data.push(newResume)
+        const resumeIndex = resumes.findIndex((resume: any) => resume.email === email)
 
-    await fs.writeFile(filePath, JSON.stringify(resumes, null, 2), 'utf-8')
+        if (resumeIndex === -1) {
+            throw createError({ statusCode: 404, statusMessage: 'Resume not found' })
+        }
 
-    return {
-        success: true,
-        total: resumes.data.length,
-        user: user.email
+        resumes[resumeIndex] = {
+            ...resumes[resumeIndex],
+            ...body,
+        }
+
+        await fs.writeFile(RESUME_FILE, JSON.stringify({ data: resumes }, null, 2))
+
+        return { success: true, resume: resumes[resumeIndex] }
+    } catch (error: any) {
+        console.error('Resume update error:', error)
+        throw createError({
+            statusCode: 500,
+            statusMessage: error.message || 'Unable to update resume'
+        })
     }
 })

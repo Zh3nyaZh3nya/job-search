@@ -10,8 +10,6 @@ import {
 import type { IResume } from "~/types";
 import {formatDate} from "~/utils/formatDate";
 
-
-
 interface IProps {
   card: IResume
 }

@@ -7,7 +7,7 @@
       "slug": "hr-менеджер-test-267",
       "from_salary": 2000,
       "currency": "€",
-      "active": true,
+      "active": false,
       "work_experience": 2,
       "date_publish": "2025-04-28",
       "avatar": "mdi-account-circle-outline",
