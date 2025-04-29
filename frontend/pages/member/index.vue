@@ -59,7 +59,7 @@ definePageMeta({
                     elevation="0"
                     class="mt-2 text-none text-h6"
                     min-width="0"
-                    :to="localePath('/create-resume')"
+                    :to="localePath('/member/create-resume')"
                     size="large"
                 >
                   <div class="d-flex align-center ga-2">
@@ -95,9 +95,9 @@ definePageMeta({
               cols="12"
               md="4"
               v-if="memberUser"
-              class="d-flex justify-center w-100"
+              class="d-flex justify-center align-start w-100"
           >
-            <v-sheet rounded="xl" elevation="" color="white" width="100%" class="pa-4 card-not-hover text-center">
+            <v-sheet rounded="xl" elevation="" color="white" height="275px" width="100%" class="pa-4 card-not-hover text-center">
               <h4 class="text-h6 font-weight-regular mb-2">{{ $t('your-profile') }}</h4>
               <v-icon icon="mdi-account-circle-outline" color="primary" size="80" class="mb-2" />
               <p>{{ memberUser.email }}</p>

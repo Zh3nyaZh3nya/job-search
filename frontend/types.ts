@@ -110,7 +110,7 @@ export interface IUserEmployer extends IUserBase {
 }
 
 export interface IVacancyBase {
-    id: number
+    id: string
     slug: string
     title: string
     post: string
@@ -155,7 +155,7 @@ export interface IVacancyCard extends IVacancyBase {
 }
 
 export interface IResumeBase {
-    id: number
+    id: string
     title: string
     slug: string
     from_salary: number | null
@@ -198,7 +198,6 @@ export interface IResume extends IResumeBase {
         professional_skills: string
         personal_skills: string
         lang: string
-        category_drive_license: CategoryDriveLicense[]
     }
 }
 

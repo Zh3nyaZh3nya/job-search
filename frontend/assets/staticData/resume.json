@@ -7,9 +7,9 @@
       "slug": "hr-менеджер-test-267",
       "from_salary": 2000,
       "currency": "€",
-      "active": false,
+      "active": true,
       "work_experience": 2,
-      "date_publish": "2025-04-28",
+      "date_publish": "2025-04-29",
       "avatar": "mdi-account-circle-outline",
       "education_level": "HIGHER",
       "category": "TRANSPORT",
@@ -43,10 +43,40 @@
         ],
         "professional_skills": "Подбор персонала, Адаптация сотрудников, Организация мероприятий",
         "personal_skills": "Коммуникабельность, ответственность, энергичность.",
-        "lang": "Русский, Английский",
-        "category_drive_license": []
+        "lang": "Русский, Английский"
       },
       "userType": "member"
+    },
+    {
+      "id": "RM08f26d832df5c6",
+      "title": "frontend",
+      "slug": "frontend",
+      "from_salary": "30000",
+      "currency": "₸",
+      "work_experience": 0,
+      "date_publish": "2025-04-29",
+      "avatar": "mdi-account-circle-outline",
+      "education_level": "HIGHER",
+      "category": "IT",
+      "email": "member@gmail.com",
+      "userType": "member",
+      "active": true,
+      "info_resume": {
+        "conditions": [
+          "FREE"
+        ],
+        "removal": false,
+        "business_trip": false,
+        "gender": "man",
+        "age": "22",
+        "city": "ALMATY",
+        "work_experience": [],
+        "education": [],
+        "professional_skills": "tet",
+        "personal_skills": "tet",
+        "lang": "tet"
+      },
+      "userEmail": "member@gmail.com"
     }
   ]
 }

@@ -14,6 +14,7 @@ interface IProps {
     width?: string
   }[]
   title: string
+  empty_text: string
 }
 
 const props = defineProps<IProps>()
@@ -213,8 +214,12 @@ function restrictDateInput(event: Event) {
     </template>
 
     <template v-else>
-      <p class="text-h6 font-weight-regular">{{ $t('you-dont-have-work-exp-title')}}</p>
-      <p class="text-h6 font-weight-regular">{{ $t('you-dont-have-work-exp-subtitle')}}</p>
+      <div
+        v-html="empty_text"
+        class="text-h6 font-weight-regular"
+      >
+      </div>
+
     </template>
 
     <v-form v-if="isAdding" ref="formRef" @submit.prevent="confirmAdding">

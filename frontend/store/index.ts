@@ -65,7 +65,6 @@ export const useStore = defineStore("index", {
                 this.resume_card = []
             }
         },
-
         async editResume(data: IResume) {
             try {
                 await useApi('/api/resume/edit', {
@@ -76,7 +75,16 @@ export const useStore = defineStore("index", {
                 console.log(e)
             }
         },
-
+        async createResume(data: IResume) {
+            try {
+                await useApi('/api/resume/create', {
+                    method: 'POST',
+                    body: data
+                })
+            } catch (e) {
+                console.log(e)
+            }
+        },
         async fetchVacancy() {
             try {
                 const { data } = await useApi<{ resume: { data: IVacancy[] } }>('/api/vacancy', { method: 'GET', credentials: 'include' })
@@ -212,7 +220,7 @@ export const useStore = defineStore("index", {
             return state.resume_card.filter(card => filteredIds.has(card.id));
         },
         GET_RESUME_PAGE(state): (id: number) => IResume | undefined {
-            return (id: number) => state.resume.find((resume) => resume.id === id);
+            return (id: number) => state.resume.find((resume) => String(resume.id) === String(id));
         },
         GET_SEARCH_RESULT: (state: RootState) => (type: 'job' | 'members', search: string): IResume[] | IVacancy[] | undefined => {
             const lowerSearch = search.toLowerCase();

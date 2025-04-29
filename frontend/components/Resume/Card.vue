@@ -61,7 +61,8 @@ const emit = defineEmits(['removeCard'])
               </div>
             </div>
             <h3 class="font-weight-regular text-body-2 text-primary mb-1">{{ $t(`category.${card.category}`) }}</h3>
-            <h4 class="font-weight-regular text-body-2">{{ card.work_experience }} {{ getYearLabel(card.work_experience) }}</h4>
+            <h4 class="font-weight-regular text-body-2" v-if="card.work_experience !== 0">{{ card.work_experience }} {{ getYearLabel(card.work_experience) }}</h4>
+            <h4 class="font-weight-regular text-body-2" v-else>{{ $t(`work_experience.NO_EXPERIENCE`)}}</h4>
           </header>
           <main class="mb-6">
             <div class="d-flex align-center flex-wrap ga-2 ga-sm-4 mb-2">

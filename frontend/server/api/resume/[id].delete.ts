@@ -5,16 +5,29 @@ import path from 'path'
 const RESUME_FILE = path.resolve('assets/staticData/resume.json')
 
 export default defineEventHandler(async (event) => {
-    const id = Number(getRouterParam(event, 'id'))
+    const idParam = getRouterParam(event, 'id')
 
     try {
         const resumeRaw = await fs.readFile(RESUME_FILE, 'utf-8')
         const parsed = JSON.parse(resumeRaw)
-        const resumes = Array.isArray(parsed) ? parsed : parsed.data
 
-        const updatedResumes = resumes.filter((r: any) => r.id !== id)
+        let resumes: any[] = []
 
-        await fs.writeFile(RESUME_FILE, JSON.stringify({ data: updatedResumes }, null, 2))
+        if (Array.isArray(parsed)) {
+            resumes = parsed
+        } else if (parsed.data && Array.isArray(parsed.data)) {
+            resumes = parsed.data
+        } else {
+            throw new Error('Invalid resume file structure')
+        }
+
+        const updatedResumes = resumes.filter((r: any) => String(r.id) !== String(idParam))
+
+        const newData = Array.isArray(parsed)
+            ? updatedResumes
+            : { data: updatedResumes }
+
+        await fs.writeFile(RESUME_FILE, JSON.stringify(newData, null, 2), 'utf-8')
 
         return { success: true }
     } catch (error: any) {

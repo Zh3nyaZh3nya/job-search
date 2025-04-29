@@ -105,7 +105,6 @@ async function editResume() {
       professional_skills: professionalSkills.value,
       personal_skills: personalSkills.value,
       lang: languages.value,
-      category_drive_license: props.card.info_resume.category_drive_license || []
     }
   }
 
@@ -121,7 +120,7 @@ async function editResume() {
       :hover="false"
       rounded="lg"
   >
-    <v-form ref="formEdit" @click.prevent="editResume">
+    <v-form ref="formEdit" @submit.prevent="editResume">
       <header class="mb-2 d-flex align-center justify-space-between">
         <div class="d-flex ga-2">
           <span class="text-grey">ID {{ $t('resume') }} {{ card.id }}</span>
@@ -187,6 +186,7 @@ async function editResume() {
               variant="outlined"
               :hide-details="true"
               color="primary"
+              :rules="[rules.required]"
               :placeholder="$t('edit-placeholder-from-salary')"
               max-width="100px"
           />
@@ -273,7 +273,7 @@ async function editResume() {
                       max-width="60px"
                       type="number"
                   />
-                  <p>{{ getYearLabel(workExperience) }}</p>
+                  <p v-if="Number(workExperience) !== 0">{{ getYearLabel(workExperience) }}</p>
                 </div>
               </div>
               <div class="mb-1 info-vacancy-types d-flex align-start">
@@ -305,27 +305,40 @@ async function editResume() {
         <v-divider class="mt-4 mb-2"></v-divider>
         <div class="mb-2">
           <UIEditSection
+              v-if="workExperience !== 0"
               v-model="infoWorkExperience"
               :item-fields="[
-              { key: 'date_from', dateField: true, label: $t('from'), placeholder: '2020-01-01', rules: [rules.required, rules.date], },
-              { key: 'date_to', dateField: true, label: $t('to'), placeholder: '2024-01-01', rules: [rules.required, rules.date], },
-              { key: 'title', label: $t('position'), placeholder: 'Frontend Developer', rules: [rules.required] },
-              { key: 'company', label: $t('company'), placeholder: 'Google', rules: [rules.required] },
-              { key: 'desc_experience', label: $t('experience-description'), placeholder: 'Работал в ...' , type: 'textarea'},
-            ]"
+                { key: 'date_from', dateField: true, label: $t('from'), placeholder: '2020-01-01', rules: [rules.required, rules.date], },
+                { key: 'date_to', dateField: true, label: $t('to'), placeholder: '2024-01-01', rules: [rules.required, rules.date], },
+                { key: 'title', label: $t('position'), placeholder: 'Frontend Developer', rules: [rules.required] },
+                { key: 'company', label: $t('company'), placeholder: 'Google', rules: [rules.required] },
+                { key: 'desc_experience', label: $t('experience-description'), placeholder: 'Работал в ...' , type: 'textarea'},
+              ]"
               :title="$t('labor_activity')"
+              :empty_text="`
+                <p>${$t('you-dont-have-work-exp-title')}</p>
+                <p>${$t('you-dont-have-work-exp-subtitle')}</p>
+              `"
           />
+          <div v-else>
+            <h3 class="text-h5 font-weight-bold mb-3">{{ $t('labor_activity') }}</h3>
+            <p class="text-h6 font-weight-regular">{{ $t('you-dont-have-work-exp') }}</p>
+          </div>
         </div>
         <v-divider class="mt-4 mb-2"></v-divider>
         <div class="mb-2">
           <UIEditSection
               v-model="educationExp"
               :item-fields="[
-              { key: 'date_from', dateField: true, label: $t('year-finish'), placeholder: '2015-09-01', rules: [rules.required, rules.date] },
-              { key: 'place', label: $t('place'), placeholder: 'University Name', rules: [rules.required] },
-              { key: 'professional', label: $t('speciality'), placeholder: 'Software Engineering', rules: [rules.required] },
-            ]"
+                { key: 'date_from', dateField: true, label: $t('year-finish'), placeholder: '2015-09-01', rules: [rules.required, rules.date] },
+                { key: 'place', label: $t('place'), placeholder: 'University Name', rules: [rules.required] },
+                { key: 'professional', label: $t('speciality'), placeholder: 'Software Engineering', rules: [rules.required] },
+              ]"
               :title="$t('education')"
+              :empty_text="`
+                <p>${$t('you-dont-have-education-exp-title')}</p>
+                <p>${$t('you-dont-have-education-exp-subtitle')}</p>
+              `"
           />
         </div>
         <v-divider class="mt-4 mb-2"></v-divider>
@@ -365,7 +378,7 @@ async function editResume() {
           </div>
         </div>
         <v-divider class="mb-2"></v-divider>
-        <div class="d-flex flex-column flex-md-row" :class="card.info_resume.category_drive_license.length ? 'mb-2' : ''">
+        <div class="d-flex flex-column flex-md-row">
           <div style="min-width: 300px">
             <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('know_lang') }}:</h5>
           </div>
@@ -380,15 +393,6 @@ async function editResume() {
                 width="100%"
                 max-width="100%"
             />
-          </div>
-        </div>
-        <v-divider class="mb-2" v-if="card.info_resume.category_drive_license.length"></v-divider>
-        <div class="d-flex" v-if="card.info_resume.category_drive_license.length">
-          <div style="min-width: 300px">
-            <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('category_drive_license') }}:</h5>
-          </div>
-          <div class="d-flex ga-1 text-h6 font-weight-regular">
-            <p v-for="lic in card.info_resume.category_drive_license" :key="lic">{{ lic }};</p>
           </div>
         </div>
       </main>

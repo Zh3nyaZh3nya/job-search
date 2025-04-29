@@ -10,7 +10,7 @@ const route = useRoute()
   <v-main>
     <section>
       <v-container>
-        <ResumePage :card="store.GET_RESUME_PAGE(+route.params.id)" />
+        <ResumePage :card="store.GET_RESUME_PAGE(String(route.params.id))" />
       </v-container>
     </section>
   </v-main>

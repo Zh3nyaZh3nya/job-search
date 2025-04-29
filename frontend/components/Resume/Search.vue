@@ -15,7 +15,8 @@ const localePath = useLocalePath()
 <template>
   <v-card
       :to="localePath(`/resume/${card.id}/${card.slug}`)"
-      class="pa-4 rounded-lg d-flex align-start ga-4 cursor-pointer"
+      class="pa-4 card rounded-lg d-flex align-start ga-4 cursor-pointer"
+      elevation="0"
   >
     <div>
       <v-icon :icon="card.avatar" size="57" color="primary"></v-icon>
@@ -23,9 +24,13 @@ const localePath = useLocalePath()
     <div class="d-flex flex-column">
       <h2 class="text-h6 font-weight-regular">{{ card.title }}</h2>
       <h3 class="font-weight-regular text-body-1">{{ card.info_resume.age }} {{ getYearLabel(card.info_resume.age) }} / {{ $t(card.info_resume.gender) }}</h3>
-      <h4 class="font-weight-regular text-body-1">
+      <h4 class="font-weight-regular text-body-1" v-if="card.work_experience !== 0">
         <label for="" class="text-primary">{{ $t('work_experience_text') }}:</label>
         {{ card.work_experience }}
+      </h4>
+      <h4 class="font-weight-regular text-body-1" v-else>
+        <label for="" class="text-primary">{{ $t('work_experience_text') }}:</label>
+        {{ $t('work_experience.NO_EXPERIENCE') }}
       </h4>
       <h5 class="font-weight-regular text-body-1">
         <label for="" class="text-primary">{{ $t('city') }}:</label>

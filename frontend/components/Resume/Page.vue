@@ -57,7 +57,8 @@ const props = defineProps<IProps>()
             </div>
             <div class="mb-1 info-vacancy-types d-flex align-start">
               <label class="text-grey">{{ $t('work_experience_text') }}</label>
-              <p>{{ card.work_experience }} {{ getYearLabel(card.work_experience) }}</p>
+              <p v-if="card.work_experience !== 0">{{ card.work_experience }} {{ getYearLabel(card.work_experience) }}</p>
+              <p v-else>{{ $t(`work_experience.NO_EXPERIENCE`)}}</p>
             </div>
             <div class="mb-1 info-vacancy-types d-flex align-start">
               <label class="text-grey">{{ $t('business_trip') }}</label>
@@ -67,7 +68,7 @@ const props = defineProps<IProps>()
         </v-row>
       </div>
       <v-divider class="mt-4 mb-2"></v-divider>
-      <div class="mb-2">
+      <div class="mb-2" v-if="card.info_resume.work_experience.length">
         <h3 class="text-h5 font-weight-bold mb-3">{{ $t('labor_activity') }}</h3>
         <div v-for="(exp, index) in card.info_resume.work_experience" :key="exp.title" class="d-flex flex-column flex-md-row">
           <p class="text-secondary font-weight-medium mt-1" style="min-width: 300px">{{ $t('from')}} {{ exp.date_from }} {{ $t('to') }} {{ exp.date_to }} </p>
@@ -78,8 +79,8 @@ const props = defineProps<IProps>()
           </div>
         </div>
       </div>
-      <v-divider class="mt-4 mb-2"></v-divider>
-      <div class="mb-2">
+      <v-divider class="mt-4 mb-2" v-if="card.info_resume.work_experience.length"></v-divider>
+      <div class="mb-2" v-if="card.info_resume.education.length">
         <h4 class="text-h5 font-weight-bold mb-3">{{ $t('education') }}</h4>
         <div v-for="(edc, index) in card.info_resume.education" :key="edc.place" class="d-flex flex-column flex-md-row">
           <p class="text-secondary font-weight-medium mt-1" style="min-width: 300px">{{ edc.date_from }}</p>
@@ -89,7 +90,7 @@ const props = defineProps<IProps>()
           </div>
         </div>
       </div>
-      <v-divider class="mt-4 mb-2"></v-divider>
+      <v-divider class="mt-4 mb-2" v-if="card.info_resume.education.length"></v-divider>
       <div class="mb-2 d-flex flex-column flex-md-row">
         <div style="min-width: 300px">
           <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('professional_skills') }}:</h5>
@@ -108,21 +109,12 @@ const props = defineProps<IProps>()
         </div>
       </div>
       <v-divider class="mb-2"></v-divider>
-      <div class="d-flex flex-column flex-md-row" :class="card.info_resume.category_drive_license.length ? 'mb-2' : ''">
+      <div class="d-flex flex-column flex-md-row">
         <div style="min-width: 300px">
           <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('know_lang') }}:</h5>
         </div>
         <div class="d-flex ga-1 text-h6 font-weight-regular">
           <p>{{ card.info_resume.lang }};</p>
-        </div>
-      </div>
-      <v-divider class="mb-2" v-if="card.info_resume.category_drive_license.length"></v-divider>
-      <div class="d-flex" v-if="card.info_resume.category_drive_license.length">
-        <div style="min-width: 300px">
-          <h5 class="text-h5 font-weight-bold mb-3" style="max-width: 210px">{{ $t('category_drive_license') }}:</h5>
-        </div>
-        <div class="d-flex ga-1 text-h6 font-weight-regular">
-          <p v-for="lic in card.info_resume.category_drive_license" :key="lic">{{ lic }};</p>
         </div>
       </div>
     </main>

@@ -1,4 +1,4 @@
-function generateRandomId(prefix: 'VC' | 'RM' = 'RM', length: number = 14): string {
+export function generateRandomId(prefix: 'VC' | 'RM' = 'RM', length: number = 14): string {
     const chars: 'abcdef0123456789' = 'abcdef0123456789'
     let randomPart: string = ''
 
