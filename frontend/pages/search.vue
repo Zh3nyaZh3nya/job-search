@@ -1,22 +1,37 @@
 <script setup lang="ts">
-import { useStore } from "~/store";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from 'vue-router'
+import { useAsyncData } from 'nuxt/app'
 
-const store = useStore()
 const route = useRoute()
+const router = useRouter()
 
-const type = ref(route.query.type as 'job' | 'members' || 'job')
-const search = ref(route.query.search as string || '')
+const type = ref<'job' | 'members'>((route.query.type as 'job' | 'members') || 'job')
+const search = ref<string>((route.query.search as string) || '')
 
-const dataSearch = computed(() => {
-  return store.GET_SEARCH_RESULT(type.value, search.value)
-})
+const { data: dataSearch, pending, error, refresh } = await useAsyncData('searchResult', async () => {
+  const { data } = await useApi(`/api/search`, {
+    params: {
+      type: type.value,
+      search: search.value,
+    },
+  })
+
+  const { result } = data.value
+
+  return { result }
+},
+  {
+    watch: [type, search],
+    immediate: true,
+  }
+)
 
 watch(() => route.query, (newQuery) => {
-  type.value = newQuery.type as 'job' | 'members' || 'job';
-  search.value = newQuery.search as string || '';
-});
+  type.value = (newQuery.type as 'job' | 'members') || 'job'
+  search.value = (newQuery.search as string) || ''
+})
 </script>
+
 
 <template>
   <v-main>
@@ -25,34 +40,47 @@ watch(() => route.query, (newQuery) => {
         <Search :type="type" :search="search" />
       </v-container>
     </section>
-    <section v-if="dataSearch&&dataSearch.length">
+
+    <section v-if="pending">
       <v-container>
-        <h1 class="mb-4">Результаты поиска {{type === 'job' ? `(${dataSearch.length} вакансии)` : `(${dataSearch.length} рюземе)`}}: </h1>
+        <v-progress-circular indeterminate color="primary" />
+      </v-container>
+    </section>
+
+    <section v-else-if="dataSearch?.result?.length">
+      <v-container>
+        <h1 class="mb-4">
+          Результаты поиска
+          {{ type === 'job' ? `(${dataSearch.result.length} вакансии)` : `(${dataSearch.result.length} резюме)` }}:
+        </h1>
+
         <v-row v-if="type === 'members'">
           <v-col
-            v-for="card in dataSearch"
-            :key="card.id"
-            cols="12"
-            md="6"
+              v-for="card in dataSearch.result"
+              :key="card.id"
+              cols="12"
+              md="6"
           >
             <ResumeSearch :card="card" />
           </v-col>
         </v-row>
+
         <v-row v-if="type === 'job'">
           <v-col
-            v-for="card in dataSearch"
-            :key="card.id"
-            cols="12"
-            md="4"
+              v-for="card in dataSearch.result"
+              :key="card.id"
+              cols="12"
+              md="4"
           >
             <VacancySearch :card="card" />
           </v-col>
         </v-row>
       </v-container>
     </section>
+
     <section v-else>
       <v-container>
-        <h1>Не удалось найти {{ type === 'job' ? 'вакансии' : 'рюземе' }} по поиску: {{ search }}</h1>
+        <h1>Не удалось найти {{ type === 'job' ? 'вакансии' : 'резюме' }} по поиску: {{ search }}</h1>
       </v-container>
     </section>
   </v-main>

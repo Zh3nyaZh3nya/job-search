@@ -214,28 +214,5 @@ export const useStore = defineStore("index", {
 
             return state.resume_card.filter(card => filteredIds.has(card.id));
         },
-        GET_SEARCH_RESULT: (state: RootState) => (type: 'job' | 'members', search: string): IResume[] | IVacancy[] | undefined => {
-            const lowerSearch = search.toLowerCase();
-
-            if (type === 'job') {
-                return state.vacancy?.filter((vacancy: IVacancy) => {
-                    return (
-                        vacancy.title?.toLowerCase().includes(lowerSearch) ||
-                        vacancy.post?.toLowerCase().includes(lowerSearch) ||
-                        vacancy.company?.toLowerCase().includes(lowerSearch)
-                    );
-                });
-            }
-
-            if (type === 'members') {
-                return state.resume?.filter((resume: IResume) => {
-                    return (
-                        resume.title?.toLowerCase().includes(lowerSearch)
-                    );
-                });
-            }
-
-            return undefined;
-        },
     },
 });
