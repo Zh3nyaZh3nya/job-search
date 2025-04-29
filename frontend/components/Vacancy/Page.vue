@@ -35,15 +35,21 @@ const props = defineProps<IProps>()
             <div>
               <div class="mb-1 info-vacancy-types d-flex">
                 <label class="text-grey">{{ $t('employment_type') }}</label>
-                <p v-for="text in card.info_vacancy.type_employment" :key="text">
-                  {{ $t(`employmentType.${text}`) }}
-                </p>
+                <div class="d-flex flex-column">
+                  <p v-for="text in card.info_vacancy.type_employment" :key="text">
+                    {{ $t(`employmentType.${text}`) }};
+                  </p>
+                </div>
+
               </div>
               <div class="mb-1 info-vacancy-types d-flex">
                 <label class="text-grey">{{ $t('work_schedule_text') }}</label>
-                <p v-for="text in card.info_vacancy.job_format" :key="text">
-                  {{ $t(`work_schedule.${text}`) }}
-                </p>
+                <div class="d-flex flex-column">
+                  <p v-for="text in card.info_vacancy.job_format" :key="text">
+                    {{ $t(`work_schedule.${text}`) }};
+                  </p>
+                </div>
+
               </div>
               <div class="mb-1 info-vacancy-types d-flex">
                 <label class="text-grey">{{ $t('internship') }}</label>

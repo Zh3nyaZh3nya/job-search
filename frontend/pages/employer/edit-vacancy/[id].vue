@@ -7,30 +7,30 @@ const store = useAuthStore()
 const route = useRoute()
 const localePath = useLocalePath()
 
-const resume = computed(() => store.resume.find(item => String(item.id) === String(route.params.id)))
+const vacancy = computed(() => store.vacancy.find(item => String(item.id) === String(route.params.id)))
 </script>
 
 <template>
-  <v-main v-if="resume">
+  <v-main v-if="vacancy">
     <section>
       <v-container>
         <v-btn
             variant="text"
             class="text-none px-0 text-h6 font-weight-regular link mb-4"
             min-width="0"
-            :to="localePath('/member')"
+            :to="localePath('/employer')"
         >
           <div class="d-flex align-center">
             <v-icon icon="mdi-chevron-left" size="24" class="mt-1"></v-icon>
             <p>{{ $t('go-to-back') }}</p>
           </div>
         </v-btn>
-        <h1 class="text-h4">{{ $t('resume') }}: {{ resume.title }}</h1>
+        <h1 class="text-h4">{{ $t('vacancy') }}: {{ vacancy.title }}</h1>
       </v-container>
     </section>
     <section>
       <v-container>
-        <ResumeEdit :card="resume" />
+        <VacancyEdit :card="vacancy" />
 
       </v-container>
     </section>

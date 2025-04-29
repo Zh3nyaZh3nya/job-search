@@ -26,7 +26,7 @@ const emit = defineEmits(['removeCard'])
       <div class="d-flex justify-space-between">
         <h2 class="font-weight-bold text-h5">{{ card.title }}</h2>
         <div v-if="profile" class="d-flex ga-2 mt-2">
-          <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/employer/vacancy/${card.id}`))"></v-icon>
+          <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/employer/edit-vacancy/${card.id}`))"></v-icon>
           <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click="emit('removeCard')"></v-icon>
           <v-icon icon="mdi-information-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/employer/vacancy/${card.id}`))"></v-icon>
         </div>
@@ -53,7 +53,12 @@ const emit = defineEmits(['removeCard'])
       <div class="d-flex align-center flex-wrap ga-2 ga-sm-4">
         <div class="d-flex align-center ga-2">
           <v-icon icon="mdi-clock-outline" size="24"></v-icon>
-          <span>{{ $t(`work_schedule.${card.job_format}`)}}</span>
+          <div class="d-flex flex-wrap ga-1">
+            <p v-for="(job, index) in card.job_format" :key="job">
+              {{ $t(`work_schedule.${job}`)}}<label v-if="index !== card.job_format.length - 1">,</label>
+            </p>
+          </div>
+          <span></span>
         </div>
         <div class="d-flex align-center ga-2">
           <v-icon icon="mdi-school-outline" size="24"></v-icon>

@@ -15,27 +15,33 @@ import {
 } from "~/types";
 import type { IVacancy } from "~/types";
 
+interface IProps {
+  card: IVacancy
+}
+
+const { card } = defineProps<IProps>()
+
 const { t } = useI18n()
 const authStore = useAuthStore()
 const store = useStore()
 
 const formEdit = ref()
-const id = ref<string>(generateRandomId('VC'))
-const title = ref<string>('')
-const datePublish = ref<string>(formatDate())
-const activeVacancy = ref<boolean>(true)
-const post = ref<string | null>(null)
-const internship = ref<boolean>(false)
-const category = ref<Category>(Category.IT)
+const id = ref<string>(card.id)
+const title = ref<string>(card.title)
+const datePublish = ref<string>(card.date_publish)
+const activeVacancy = ref<boolean>(card.active)
+const post = ref<string | null>(card.post)
+const internship = ref<boolean>(card.info_vacancy.internship)
+const category = ref<Category>(card.category)
 const categoryItem = computed(() => {
   return Object.values(Category).map((category) => ({
     title: t(`category.${category}`),
     value: category
   }))
 })
-const salaryFrom = ref<number | null>(null)
-const salaryTo = ref<number | null>(null)
-const currency = ref<Currency>(Currency.KZT)
+const salaryFrom = ref<number | null>(card.from_salary)
+const salaryTo = ref<number | null>(card.to_salary)
+const currency = ref<Currency>(card.currency)
 const currencyItem = computed(() => {
   return Object.values(Currency).map((cr) => ({
     title: cr,
@@ -45,10 +51,10 @@ const currencyItem = computed(() => {
 const workSchedule = ref<{
   title: string
   value: WorkSchedule
-}[]>([{
-  title: t(`work_schedule.${WorkSchedule.FREE}`),
-  value: WorkSchedule.FREE
-}])
+}[]>(card.info_vacancy.job_format.map((item) => ({
+  title: t(`work_schedule.${item}`),
+  value: item
+})))
 const workScheduleItem = computed(() => {
   return Object.values(WorkSchedule).map((condition) => ({
     title: t(`work_schedule.${condition}`),
@@ -58,24 +64,24 @@ const workScheduleItem = computed(() => {
 const employmentType = ref<{
   title: string
   value: EmploymentType
-}[]>([{
-  title: t(`employmentType.${EmploymentType.FULL_TIME}`),
-  value: EmploymentType.FULL_TIME
-}])
+}[]>(card.info_vacancy.type_employment.map((item) => ({
+  title: t(`employmentType.${item}`),
+  value: item
+})))
 const employmentTypeItem = computed(() => {
   return Object.values(EmploymentType).map((condition) => ({
     title: t(`employmentType.${condition}`),
     value: condition
   }))
 })
-const city = ref<City>(City.ALMATY)
+const city = ref<City>(card.city)
 const cityItem = computed(() => {
   return Object.values(City).map((city) => ({
     title: t(`${city}`),
     value: city
   }))
 })
-const education = ref<EducationLevel>(EducationLevel.HIGHER)
+const education = ref<EducationLevel>(card.info_vacancy.education)
 const educationItem = computed(() => {
   return Object.values(EducationLevel).map((education) => ({
     title: t(`educationLevel.${education}`),
@@ -86,8 +92,8 @@ const workExperience = ref<{
   title: string
   value: WorkExperience
 }>({
-  title: t(`work_experience.${WorkExperience.NO_EXPERIENCE}`),
-  value: WorkExperience.NO_EXPERIENCE
+  title: t(`work_experience.${card.info_vacancy.work_experience}`),
+  value: card.info_vacancy.work_experience
 })
 const workExperienceItem = computed(() => {
   return Object.values(WorkExperience).map((exp) => ({
@@ -95,9 +101,8 @@ const workExperienceItem = computed(() => {
     value: exp
   }))
 })
-const languages = ref<string>('')
-const personalSkills = ref<string>('')
-const professionalSkills = ref<string>('')
+const personalSkills = ref<string>(card.personal_skills)
+const professionalSkills = ref<string>(card.professional_skills)
 const rules = {
   required: (v: any) => !!v || t('required'),
 }
@@ -135,41 +140,8 @@ async function editVacancy() {
     address: authStore.user.address,
   }
 
-  await store.createVacancy(bodyData)
-
-  resetForm()
+  await store.editVacancy(bodyData)
 }
-
-function resetForm() {
-  id.value = generateRandomId('VC')
-  title.value = ''
-  datePublish.value = formatDate()
-  activeVacancy.value = true
-  post.value = null
-  internship.value = false
-  category.value = Category.IT
-  salaryFrom.value = null
-  salaryTo.value = null
-  currency.value = Currency.KZT
-  workSchedule.value = [{
-    title: t(`work_schedule.${WorkSchedule.FREE}`),
-    value: WorkSchedule.FREE
-  }]
-  employmentType.value = [{
-    title: t(`employmentType.${EmploymentType.FULL_TIME}`),
-    value: EmploymentType.FULL_TIME
-  }]
-  city.value = City.ALMATY
-  education.value = EducationLevel.HIGHER
-  workExperience.value = {
-    title: t(`work_experience.${WorkExperience.NO_EXPERIENCE}`),
-    value: WorkExperience.NO_EXPERIENCE
-  }
-  languages.value = ''
-  personalSkills.value = ''
-  professionalSkills.value = ''
-}
-
 </script>
 
 <template>

@@ -22,10 +22,16 @@ const localePath = useLocalePath()
       <h2 class="text-h6 mb-2  font-weight-regular">{{ card.title }}</h2>
       <h3 class="text-subtitle-2 text-primary">{{ $t(`category.${card.category}`) }}</h3>
       <h4 class="text-subtitle-2 text-primary mb-3">{{ $t('from') }} {{ card.from_salary + card.currency }}</h4>
-      <h5 class="text-subtitle-2 d-flex align-center ga-2 mb-2">
+      <div class="d-flex align-center ga-2 mb-2">
         <v-icon icon="mdi-clock-outline"></v-icon>
-        {{ $t(`work_schedule.${card.job_format}`) }}
-      </h5>
+        <div class="d-flex flex-wrap">
+          <p class="text-subtitle-2" v-for="(job, index) in card.job_format" :key="job" :class="index !== card.job_format.length - 1 ? 'mr-1' : ''">
+            {{ $t(`work_schedule.${job}`) }}<label v-if="index !== card.job_format.length - 1">, </label>
+          </p>
+        </div>
+
+      </div>
+
       <h6 class="text-subtitle-2 d-flex align-center ga-2">
         <v-icon icon="mdi-school-outline"></v-icon>
         {{ $t(`educationLevel.${card.education}`) }}
