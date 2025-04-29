@@ -4,23 +4,33 @@ import type { IVacancyCard } from "~/types";
 
 interface IProps {
   card: IVacancyCard
+  profile?: boolean
 }
 
 const props = defineProps<IProps>()
 const localePath = useLocalePath()
+const emit = defineEmits(['removeCard'])
 </script>
 
 <template>
   <v-card
       v-if="card"
-      :to="localePath(`/vacancy/${card.id}/${card.slug}`)"
+      :to="profile ? undefined : localePath(`/vacancy/${card.id}/${card.slug}`)"
       class="vacancy-card card pa-6"
-      :hover="true"
+      :hover="!profile"
+      :class="profile ? 'card-not-hover' : 'card'"
       elevation="0"
       rounded="xl"
   >
     <header class="mb-4">
-      <h2 class="font-weight-bold text-h5">{{ card.title }}</h2>
+      <div class="d-flex justify-space-between">
+        <h2 class="font-weight-bold text-h5">{{ card.title }}</h2>
+        <div v-if="profile" class="d-flex ga-2 mt-2">
+          <v-icon icon="mdi-pencil-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/employer/vacancy/${card.id}`))"></v-icon>
+          <v-icon icon="mdi-delete-outline" size="20px" class="cursor-pointer link" @click="emit('removeCard')"></v-icon>
+          <v-icon icon="mdi-information-outline" size="20px" class="cursor-pointer link" @click="$router.push(localePath(`/employer/vacancy/${card.id}`))"></v-icon>
+        </div>
+      </div>
       <h3 class="font-weight-regular text-subtitle-1">{{ card.post }}</h3>
       <h4 class="font-weight-regular text-body-1 text-primary">{{ $t(`category.${card.category}`) }}</h4>
       <h5 class="font-weight-regular text-h4 text-primary lh-normal">{{ card.from_salary }} {{ card.currency }}</h5>
