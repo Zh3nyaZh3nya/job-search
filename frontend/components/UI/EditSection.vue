@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import {useDisplay} from "vuetify/framework";
 
 interface IProps {
   modelValue: any[]
@@ -21,6 +22,7 @@ const props = defineProps<IProps>()
 const emit = defineEmits<{
   (e: 'update:modelValue', value: any[]): void
 }>()
+const { width } = useDisplay()
 
 const formRef = ref()
 const editingIndex = ref<number | null>(null)
@@ -145,7 +147,7 @@ function restrictDateInput(event: Event) {
                       @input="restrictDateInput"
                   />
                 </div>
-                <div class="d-flex align-center w-100 ga-2" v-else>
+                <div class="d-flex align-start flex-wrap w-100 ga-2" v-else>
                   <p class="text-h6 text-secondary" style="width: 150px">{{ field.label }}:</p>
                   <v-text-field
                       v-if="field.type !== 'textarea'"
@@ -158,6 +160,7 @@ function restrictDateInput(event: Event) {
                       v-bind="field.mask ? { 'v-mask': field.mask } : {}"
                       :hide-details="true"
                       width="100%"
+                      :max-width="width < 600 ? '100%' : ''"
                   />
                   <v-textarea
                       v-else-if="field.type === 'textarea' && !field.dateField"
@@ -169,24 +172,25 @@ function restrictDateInput(event: Event) {
                       color="primary"
                       :hide-details="true"
                       width="100%"
+                      :max-width="width < 600 ? '100%' : ''"
                   />
                 </div>
 
               </div>
 
-              <div class="d-flex justify-center mt-4 ga-4">
+              <div class="d-flex justify-center flex-wrap mt-4 ga-4">
                 <v-btn
                     size="large"
                     elevation="0"
                     color="primary"
-                    width="200px"
+                    :width="width < 600 ? '100%' : '200px'"
                     @click="saveEditing"
                 >
                   {{ $t('confirm') }}
                 </v-btn>
                 <v-btn
                     color="error"
-                    width="200px"
+                    :width="width < 600 ? '100%' : '200px'"
                     size="large"
                     elevation="0"
                     @click="cancelEditing"
@@ -241,7 +245,7 @@ function restrictDateInput(event: Event) {
                 @input="restrictDateInput"
             />
           </div>
-          <div class="d-flex align-center w-100 ga-2" v-else>
+          <div class="d-flex align-start flex-wrap w-100 ga-2" v-else>
             <p class="text-h6 text-secondary" style="width: 150px">{{ field.label }}:</p>
             <v-text-field
                 v-if="field.type !== 'textarea'"
@@ -254,6 +258,7 @@ function restrictDateInput(event: Event) {
                 v-bind="field.mask ? { 'v-mask': field.mask } : {}"
                 :hide-details="true"
                 width="100%"
+                :max-width="width < 600 ? '100%' : ''"
             />
             <v-textarea
                 v-else-if="field.type === 'textarea' && !field.dateField"
@@ -265,24 +270,25 @@ function restrictDateInput(event: Event) {
                 color="primary"
                 :hide-details="true"
                 width="100%"
+                :max-width="width < 600 ? '100%' : ''"
             />
           </div>
 
         </div>
 
-        <div class="d-flex justify-center mt-4 ga-4">
+        <div class="d-flex justify-center flex-wrap mt-4 ga-4">
           <v-btn
               size="large"
               elevation="0"
               color="primary"
-              width="200px"
+              :width="width < 600 ? '100%' : '200px'"
               @click="confirmAdding"
           >
             {{ $t('confirm') }}
           </v-btn>
           <v-btn
               color="error"
-              width="200px"
+              :width="width < 600 ? '100%' : '200px'"
               size="large"
               elevation="0"
               @click="cancelAdding"

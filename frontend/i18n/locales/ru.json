@@ -112,6 +112,13 @@
   "create": "Создать",
   "your-vacancy": "Ваши вакансии",
   "your-resume": "Ваши резюме",
+  "save": "Сохранить",
+  "edit-placeholder-from-salary": "от",
+  "edit-placeholder-to-salary": "до",
+  "edit-placeholder-professional-skills": "Знание классических алгоритмов и ...",
+  "edit-placeholder-personal-skills": "Коммуникативность, ...",
+  "edit-placeholder-lang": "Русский (родной), ...",
+  "grade": "Должность",
   "work_schedule": {
     "FULL_TIME": "Полный рабочий день",
     "PART_TIME": "Неполный рабочий день",

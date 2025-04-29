@@ -14,6 +14,7 @@ import {
   WorkSchedule
 } from "~/types";
 import type { IVacancy } from "~/types";
+import { useDisplay } from "vuetify";
 
 interface IProps {
   card: IVacancy
@@ -24,6 +25,7 @@ const { card } = defineProps<IProps>()
 const { t } = useI18n()
 const authStore = useAuthStore()
 const store = useStore()
+const { width } = useDisplay()
 
 const formEdit = ref()
 const id = ref<string>(card.id)
@@ -152,12 +154,37 @@ async function editVacancy() {
       rounded="lg"
   >
     <v-form ref="formEdit" @submit.prevent="editVacancy">
-      <header class="mb-2 d-flex align-center justify-space-between">
-        <div class="d-flex ga-2">
+      <header class="mb-2 d-flex align-center align-sm-start justify-space-between flex-wrap w-100 w-sm-auto">
+        <div class="d-flex align-center align-sm-start flex-column flex-sm-row ga-2 w-100 w-sm-auto">
           <span class="text-grey">ID {{ $t('vacancy') }} {{ id }}</span>
-          <span :class="activeVacancy ? 'text-success' : 'text-error'">{{ activeVacancy ? $t('active') : $t('not-active') }}</span>
+          <div class="d-flex align-center align-sm-start justify-space-between w-100 w-sm-auto mt-2 mt-sm-0">
+            <p :class="activeVacancy ? 'text-success' : 'text-error'" class="w-100">{{ activeVacancy ? $t('active') : $t('not-active') }}</p>
+            <div class="d-flex d-sm-none justify-end align-center ga-2 w-100">
+              <v-btn
+                  color="primary"
+                  elevation="0"
+                  class="text-h6 text-none"
+                  size="large"
+                  width="100px"
+                  type="submit"
+              >
+                {{ $t('save') }}
+              </v-btn>
+              <v-btn
+                  elevation="0"
+                  class="text-h6 text-none"
+                  size="large"
+                  min-width="0"
+                  variant="text"
+                  @click="activeVacancy = !activeVacancy"
+              >
+                <v-icon v-if="activeVacancy" icon="mdi-eye" color="primary"></v-icon>
+                <v-icon v-else icon="mdi-eye-closed" color="primary"></v-icon>
+              </v-btn>
+            </div>
+          </div>
         </div>
-        <div class="d-flex align-center ga-2">
+        <div class="d-none d-sm-flex align-center ga-2">
           <v-btn
               color="primary"
               elevation="0"
@@ -184,7 +211,7 @@ async function editVacancy() {
       <main class="mb-2">
         <v-divider class="mb-2"></v-divider>
         <p class="text-body-2 text-grey mb-2">{{ $t('publish') }} {{ datePublish }}</p>
-        <div class="mb-1 d-flex align-center ga-2">
+        <div class="mb-1 d-flex align-center flex-wrap ga-2">
           <p class="text-grey text-h6 font-weight-regular" style="min-width: 100px">{{ $t('title') }}: </p>
           <v-text-field
               v-model="title"
@@ -193,9 +220,11 @@ async function editVacancy() {
               :rules="[rules.required]"
               color="primary"
               :placeholder="$t('edit-placeholder-title')"
+              :width="width < 600 ? '100%' : ''"
+              :max-width="width < 600 ? '100%' : ''"
           />
         </div>
-        <div class="mb-2 d-flex align-center ga-2">
+        <div class="mb-2 d-flex align-center flex-wrap ga-2">
           <p class="text-grey text-h6 font-weight-regular" style="min-width: 100px">{{ $t('category-text') }}: </p>
           <v-select
               v-model="category"
@@ -207,9 +236,11 @@ async function editVacancy() {
               color="primary"
               :rules="[rules.required]"
               :placeholder="$t('edit-placeholder-category')"
+              :width="width < 600 ? '100%' : ''"
+              :max-width="width < 600 ? '100%' : ''"
           />
         </div>
-        <div class="mb-1 d-flex align-center ga-2">
+        <div class="mb-1 d-flex align-center flex-wrap ga-2">
           <p class="text-grey text-h6 font-weight-regular" style="min-width: 100px">{{ $t('grade') }}: </p>
           <v-text-field
               v-model="post"
@@ -218,42 +249,47 @@ async function editVacancy() {
               :rules="[rules.required]"
               color="primary"
               :placeholder="$t('edit-placeholder-grade')"
+              :width="width < 600 ? '100%' : ''"
+              :max-width="width < 600 ? '100%' : ''"
           />
         </div>
-        <div class="mb-1 d-flex align-center ga-2">
+        <div class="mb-1 d-flex align-center flex-wrap ga-2">
           <p class="text-grey text-h6 font-weight-regular" style="min-width: 100px">{{ $t('salary') }}: </p>
-          <v-text-field
-              type="number"
-              v-model="salaryFrom"
-              variant="outlined"
-              :hide-details="true"
-              color="primary"
-              :rules="[rules.required]"
-              :placeholder="$t('edit-placeholder-from-salary')"
-              max-width="100px"
-          />
-          {{ $t('to') }}
-          <v-text-field
-              type="number"
-              v-model="salaryTo"
-              variant="outlined"
-              :hide-details="true"
-              color="primary"
-              :placeholder="$t('edit-placeholder-from-salary')"
-              max-width="100px"
-          />
-          <v-select
-              v-model="currency"
-              :items="currencyItem"
-              item-title="title"
-              item-value="value"
-              variant="outlined"
-              :hide-details="true"
-              color="primary"
-              :rules="[rules.required]"
-              :placeholder="$t('edit-placeholder-currency')"
-              max-width="100px"
-          />
+          <div class="d-flex align-center flex-wrap ga-2">
+            <v-text-field
+                type="number"
+                v-model="salaryFrom"
+                variant="outlined"
+                :hide-details="true"
+                color="primary"
+                :rules="[rules.required]"
+                :placeholder="$t('edit-placeholder-from-salary')"
+                max-width="100px"
+            />
+            {{ $t('to') }}
+            <v-text-field
+                type="number"
+                v-model="salaryTo"
+                variant="outlined"
+                :hide-details="true"
+                color="primary"
+                :placeholder="$t('edit-placeholder-to-salary')"
+                max-width="100px"
+            />
+            <v-select
+                v-model="currency"
+                :items="currencyItem"
+                item-title="title"
+                item-value="value"
+                variant="outlined"
+                :hide-details="true"
+                color="primary"
+                :rules="[rules.required]"
+                :placeholder="$t('edit-placeholder-currency')"
+                max-width="100px"
+            />
+          </div>
+
         </div>
         <v-divider class="my-2"></v-divider>
         <div class="mb-2">
@@ -261,8 +297,8 @@ async function editVacancy() {
           <v-row>
             <v-col cols="12" md="4" class="pb-0 pb-md-4">
               <div>
-                <div class="mb-1 info-vacancy-types d-flex align-start">
-                  <label class="text-grey">{{ $t('employment_type') }}</label>
+                <div class="mb-1 info-vacancy-types d-flex align-start flex-wrap flex-sm-nowrap">
+                  <label class="text-grey mb-2 mb-sm-0">{{ $t('employment_type') }}</label>
                   <v-combobox
                       chips
                       multiple
@@ -275,11 +311,13 @@ async function editVacancy() {
                       :rules="[rules.required]"
                       :placeholder="$t('edit-placeholder-employment')"
                       color="primary"
+                      :width="width < 600 ? '100%' : ''"
+                      :max-width="width < 600 ? '100%' : ''"
                   />
                 </div>
 
-                <div class="mb-1 info-vacancy-types d-flex align-start">
-                  <label class="text-grey">{{ $t('work_schedule_text') }}</label>
+                <div class="mb-1 info-vacancy-types d-flex align-start flex-wrap flex-sm-nowrap">
+                  <label class="text-grey mb-2 mb-sm-0">{{ $t('work_schedule_text') }}</label>
                   <v-combobox
                       chips
                       multiple
@@ -292,11 +330,13 @@ async function editVacancy() {
                       :rules="[rules.required]"
                       :placeholder="$t('edit-placeholder-employment')"
                       color="primary"
+                      :width="width < 600 ? '100%' : ''"
+                      :max-width="width < 600 ? '100%' : ''"
                   />
                 </div>
 
-                <div class="mb-1 info-vacancy-types d-flex align-start">
-                  <label class="text-grey">{{ $t('internship') }}</label>
+                <div class="mb-1 info-vacancy-types d-flex align-start flex-wrap flex-sm-nowrap">
+                  <label class="text-grey mb-2 mb-sm-0">{{ $t('internship') }}</label>
                   <v-select
                       v-model="internship"
                       :items="[
@@ -315,12 +355,14 @@ async function editVacancy() {
                       :hide-details="true"
                       color="primary"
                       :placeholder="$t('edit-placeholder-business_trip')"
+                      :width="width < 600 ? '100%' : ''"
+                      :max-width="width < 600 ? '100%' : ''"
                   />
                 </div>
               </div>
             </v-col>
             <v-col cols="12" md="5" class="pt-0 pt-md-4">
-              <div class="mb-1 info-vacancy-types d-flex align-start">
+              <div class="mb-1 info-vacancy-types d-flex align-start flex-wrap flex-sm-nowrap">
                 <label class="text-grey">{{ $t('education') }}</label>
                 <v-select
                     v-model="education"
@@ -332,10 +374,12 @@ async function editVacancy() {
                     color="primary"
                     :rules="[rules.required]"
                     :placeholder="$t('edit-placeholder-education')"
+                    :width="width < 600 ? '100%' : ''"
+                    :max-width="width < 600 ? '100%' : ''"
                 />
               </div>
 
-              <div class="mb-1 info-vacancy-types d-flex align-start">
+              <div class="mb-1 info-vacancy-types d-flex align-start flex-wrap flex-sm-nowrap">
                 <label class="text-grey">{{ $t('work_experience_text') }}</label>
                 <v-select
                     v-model="workExperience"
@@ -347,6 +391,8 @@ async function editVacancy() {
                     color="primary"
                     :rules="[rules.required]"
                     :placeholder="$t('edit-placeholder-education')"
+                    :width="width < 600 ? '100%' : ''"
+                    :max-width="width < 600 ? '100%' : ''"
                 />
               </div>
             </v-col>
