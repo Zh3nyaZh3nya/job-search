@@ -6,7 +6,7 @@ interface IProps {
   user: IUserMember | IUserEmployer
 }
 
-const props = defineProps<IProps>()
+const { user } = defineProps<IProps>()
 const emits = defineEmits(['logout'])
 </script>
 
@@ -24,8 +24,14 @@ const emits = defineEmits(['logout'])
       </div>
       <div class="d-flex flex-column">
         <p>Email: {{ user.email }}</p>
-        <p>{{ $t('фио') }}: {{ user.name }} {{ user.last_name }}</p>
-        <p>{{ $t('gender') + '/' + $t('age') }}: {{ $t(user.gender) }} {{ user.age }} {{ getYearLabel(user.age) }}</p>
+        <div v-if="user.userType === 'member'">
+          <p>{{ $t('фио') }}: {{ user.name }} {{ user.last_name }}</p>
+          <p>{{ $t('gender') + '/' + $t('age') }}: {{ $t(user.gender) }} {{ user.age }} {{ getYearLabel(user.age) }}</p>
+        </div>
+        <div v-else>
+          <p>{{ $t('company') }}: {{ user.company }}</p>
+          <p>{{ $t('address') }}: {{ user.address }}</p>
+        </div>
       </div>
     </div>
     <v-divider color="secondary" class="my-2" />

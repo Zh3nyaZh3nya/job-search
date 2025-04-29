@@ -1,19 +1,21 @@
 import { defineStore } from 'pinia'
 import { useApi } from '~/composables/useApi'
 import { navigateTo } from '#app'
-import type { IUserMember, IUserEmployer, IResume } from '~/types'
+import type {IUserMember, IUserEmployer, IResume, IVacancy} from '~/types'
 
 type UserType = IUserEmployer | IUserMember
 
 interface RootState {
     user: UserType | null
     resume: IResume[]
+    vacancy: IVacancy[]
 }
 
 export const useAuthStore = defineStore('auth', {
     state: (): RootState => ({
         user: null,
-        resume: []
+        resume: [],
+        vacancy: []
     }),
 
     actions: {
@@ -44,7 +46,7 @@ export const useAuthStore = defineStore('auth', {
 
         async fetchUserResumes(): Promise<void> {
             try {
-                const { data } = await useApi<{ resume: IResume }>('/api/auth/user/resume', { method: 'GET', credentials: 'include' })
+                const { data } = await useApi<{ resume: IResume[] }>('/api/auth/user/resume', { method: 'GET', credentials: 'include' })
                 this.resume = toRaw(data.value.resume)
             } catch (e) {
                 console.error('Resume fetch error:', e)
@@ -64,7 +66,31 @@ export const useAuthStore = defineStore('auth', {
             } catch (e) {
                 console.error('Ошибка удаления:', e)
             }
-        }
+        },
+
+        async fetchUserVacancy(): Promise<void> {
+            try {
+                const { data } = await useApi<{ vacancy: IVacancy[] }>('/api/auth/user/vacancy', { method: 'GET', credentials: 'include' })
+                this.vacancy = toRaw(data.value.vacancy)
+            } catch (e) {
+                console.error('Vacancy fetch error:', e)
+                this.vacancy = []
+            }
+        },
+
+        async deleteUserVacancy(vacancyId: number) {
+            try {
+                const { data } = await useApi(`/api/vacancy/${vacancyId}`, {
+                    method: 'DELETE',
+                    credentials: 'include',
+                })
+
+                this.vacancy = this.vacancy.filter((r: any) => r.id !== vacancyId)
+
+            } catch (e) {
+                console.error('Ошибка удаления:', e)
+            }
+        },
     },
 
     getters: {

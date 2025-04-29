@@ -112,9 +112,6 @@ export const useStore = defineStore("index", {
         },
     },
     getters: {
-        GET_VACANCY_PAGE(state): (id: number) => IVacancy | undefined {
-            return (id: number) => state.vacancy.find((vacancy) => vacancy.id === id);
-        },
         GET_VACANCY_CARD(state): IVacancyCard[] {
             const {
                 city,
@@ -216,9 +213,6 @@ export const useStore = defineStore("index", {
             const filteredIds = new Set(filteredResumes.map(r => r.id));
 
             return state.resume_card.filter(card => filteredIds.has(card.id));
-        },
-        GET_RESUME_PAGE(state): (id: number) => IResume | undefined {
-            return (id: number) => state.resume.find((resume) => String(resume.id) === String(id));
         },
         GET_SEARCH_RESULT: (state: RootState) => (type: 'job' | 'members', search: string): IResume[] | IVacancy[] | undefined => {
             const lowerSearch = search.toLowerCase();

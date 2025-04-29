@@ -107,6 +107,11 @@
   "you-dont-have-work-exp": "У вас нет опыта работы",
   "you-dont-have-education-exp-title": "У вас нет добавленных данных об образовании",
   "you-dont-have-education-exp-subtitle": "Добавьте информацию об учебных заведениях, чтобы повысить привлекательность вашего резюме",
+  "not-vacancy-title": "У вас ещё нет вакансий",
+  "not-vacancy-subtitle": "Создайте первую вакансию и найдите своих сотрудников!",
+  "create": "Создать",
+  "your-vacancy": "Ваши вакансии",
+  "your-resume": "Ваши резюме",
   "work_schedule": {
     "FULL_TIME": "Полный рабочий день",
     "PART_TIME": "Неполный рабочий день",

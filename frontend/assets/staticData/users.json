@@ -43,5 +43,14 @@
     "userType": "employer",
     "company": "test",
     "address": "test"
+  },
+  {
+    "email": "employer@gmail.com",
+    "passwordHash": "$2b$10$mM4E5Yjx0MkB93DcsdcFMe0O/lc/4yV3nvpD1lb.sYdCwG1x7aXN2",
+    "notifications": [],
+    "id_user": "2025-04-29T13:09:25.634Z",
+    "userType": "employer",
+    "company": "GOOGLE",
+    "address": "Суюнбая 263/12"
   }
 ]

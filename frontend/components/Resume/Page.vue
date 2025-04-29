@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IResume } from "~/types";
-import {getYearLabel} from "~/utils/getYearLabel";
+import { getYearLabel } from "~/utils/getYearLabel";
 
 interface IProps {
   card: IResume

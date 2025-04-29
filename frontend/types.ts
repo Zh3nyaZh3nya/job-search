@@ -92,10 +92,10 @@ export interface IUserBase {
     email: string
     password: string
     notifications: string[]
-    userType: 'member' | 'employer'
 }
 
 export interface IUserMember extends IUserBase {
+    userType: 'member'
     name: string
     last_name: string
     gender: 'man' | 'woman'
@@ -104,6 +104,7 @@ export interface IUserMember extends IUserBase {
 }
 
 export interface IUserEmployer extends IUserBase {
+    userType: 'employer'
     company: string
     address: string
     vacancies: IVacancy[] | null
@@ -113,7 +114,7 @@ export interface IVacancyBase {
     id: string
     slug: string
     title: string
-    post: string
+    post: string | null
     category: string
     from_salary: number
     currency: Currency
@@ -126,16 +127,16 @@ export interface IVacancyBase {
 }
 
 export interface IVacancyCardSmall extends Omit<IVacancyBase, 'company' | 'date_publish'> {
-    job_format: WorkSchedule
+    job_format: WorkSchedule[]
     education: EducationLevel
 }
 
 export interface IVacancy extends IVacancyBase {
     to_salary: number | null
     info_vacancy: {
-        job_format: WorkSchedule
+        job_format: WorkSchedule[]
         education: EducationLevel
-        type_employment: EmploymentType
+        type_employment: EmploymentType[]
         internship: boolean
         work_experience: WorkExperience
     }
@@ -150,7 +151,7 @@ export interface IVacancyCard extends IVacancyBase {
     city: City
     address: string
     work_experience: WorkExperience
-    job_format: WorkSchedule
+    job_format: WorkSchedule[]
     education_level: EducationLevel
 }
 
