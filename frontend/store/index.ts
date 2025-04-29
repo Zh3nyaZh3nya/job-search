@@ -7,18 +7,14 @@ import { useApi } from "~/composables/useApi";
 import { resumeTransformToCard } from "~/assets/staticData/resumeTransformToCard";
 import { vacancyTransformToCard } from "~/assets/staticData/vacancyTransformToCard";
 import type {
-    IVacancy, IVacancyCardSmall, IResume, IResumeCardSmall,
+    IVacancy, IVacancyCardSmall, IResume,
     IVacancyCard, IResumeCard
 } from "~/types";
-import {slugify} from "~/utils/slugify";
-import {formatDate} from "~/utils/formatDate";
 
 interface RootState {
     vacancy: IVacancy[]
-    vacancy_main: IVacancyCardSmall[]
     vacancy_card: IVacancyCard[]
     resume: IResume[]
-    resume_main: IResumeCardSmall[]
     resume_card: IResumeCard[]
     filters: {
         city: City | null
@@ -34,10 +30,8 @@ interface RootState {
 export const useStore = defineStore("index", {
     state: (): RootState => ({
         vacancy: [],
-        vacancy_main: [],
         vacancy_card: [],
         resume: [],
-        resume_main: [],
         resume_card: [],
         filters: {
             city: null,
@@ -56,12 +50,10 @@ export const useStore = defineStore("index", {
                 const { resume } = data?.value
 
                 this.resume = resume
-                this.resume_main = resumeTransformToCard(resume, 'small')
                 this.resume_card = resumeTransformToCard(resume, 'usually')
             } catch (e) {
                 console.error(e)
                 this.resume = []
-                this.resume_main = []
                 this.resume_card = []
             }
         },
@@ -91,20 +83,35 @@ export const useStore = defineStore("index", {
                 const { vacancy } = data?.value
 
                 this.vacancy = vacancy
-                this.vacancy_main = vacancyTransformToCard(vacancy, 'small')
                 this.vacancy_card = vacancyTransformToCard(vacancy, 'usually')
             } catch (e) {
                 console.error(e)
                 this.vacancy = []
-                this.vacancy_main = []
                 this.vacancy_card = []
+            }
+        },
+        async editVacancy(data: IVacancy) {
+            try {
+                await useApi('/api/vacancy/edit', {
+                    method: 'POST',
+                    body: data
+                })
+            } catch (e) {
+                console.log(e)
+            }
+        },
+        async createVacancy(data: IVacancy) {
+            try {
+                await useApi('/api/vacancy/create', {
+                    method: 'POST',
+                    body: data
+                })
+            } catch (e) {
+                console.log(e)
             }
         },
     },
     getters: {
-        GET_VACANCY: (state: RootState): IVacancy[] => {
-            return state.vacancy;
-        },
         GET_VACANCY_PAGE(state): (id: number) => IVacancy | undefined {
             return (id: number) => state.vacancy.find((vacancy) => vacancy.id === id);
         },
@@ -160,15 +167,6 @@ export const useStore = defineStore("index", {
             const filteredIds = new Set(filteredVacancies.map(v => v.id));
 
             return state.vacancy_card.filter(card => filteredIds.has(card.id));
-        },
-        GET_VACANCY_MAIN(state): IVacancyCardSmall[] {
-            return state.vacancy_main;
-        },
-        GET_RESUME(state): IResume[] {
-            return state.resume;
-        },
-        GET_RESUME_MAIN(state): IResumeCardSmall[] {
-            return state.resume_main;
         },
         GET_RESUME_CARD(state): IResumeCard[] {
             const {

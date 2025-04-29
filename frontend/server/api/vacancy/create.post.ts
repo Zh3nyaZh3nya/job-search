@@ -1,11 +1,11 @@
+import { defineEventHandler, readBody, createError } from 'h3'
+// @ts-ignore
+import { useRuntimeConfig } from '#imports'
 import fs from 'fs'
 import path from 'path'
-import { defineEventHandler, readBody, createError } from 'h3'
 import jwt from 'jsonwebtoken'
-import { useRuntimeConfig } from '#imports'
 
 export default defineEventHandler(async (event) => {
-    // Получаем JWT из cookie
     const token = event.node.req.headers.cookie
         ?.split('; ')
         .find(row => row.startsWith('auth_token='))

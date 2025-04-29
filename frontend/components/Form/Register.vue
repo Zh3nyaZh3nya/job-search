@@ -218,6 +218,7 @@ const submitForm = async (type: Select) => {
     <v-text-field
         v-model="formEmployer.password"
         :label="$t('password')"
+        type="password"
         variant="outlined"
         max-width="250px"
         width="100%"

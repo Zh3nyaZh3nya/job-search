@@ -1,53 +1,6 @@
 {
   "data": [
     {
-      "email": "member@gmail.com",
-      "id": 11,
-      "title": "HR-менеджер-test-267",
-      "slug": "hr-менеджер-test-267",
-      "from_salary": 2000,
-      "currency": "€",
-      "active": true,
-      "work_experience": 2,
-      "date_publish": "2025-04-29",
-      "avatar": "mdi-account-circle-outline",
-      "education_level": "HIGHER",
-      "category": "TRANSPORT",
-      "info_resume": {
-        "conditions": [
-          "REMOTE",
-          "ROTATIONAL",
-          "PIECEWORK"
-        ],
-        "removal": false,
-        "business_trip": false,
-        "gender": "man",
-        "age": "22",
-        "city": "PETROPAVLOVSK",
-        "work_experience": [
-          {
-            "date_from": "2021-01-01",
-            "date_to": "2024-12-31",
-            "title": "HR-менеджер",
-            "category": "HR",
-            "company": "Global HR Solutions",
-            "desc_experience": "Подбор персонала, организация тренингов и адаптация сотрудников."
-          }
-        ],
-        "education": [
-          {
-            "date_from": "2016-09-01",
-            "place": "Казахстанский университет менеджмента",
-            "professional": "Управление персоналом"
-          }
-        ],
-        "professional_skills": "Подбор персонала, Адаптация сотрудников, Организация мероприятий",
-        "personal_skills": "Коммуникабельность, ответственность, энергичность.",
-        "lang": "Русский, Английский"
-      },
-      "userType": "member"
-    },
-    {
       "id": "RM08f26d832df5c6",
       "title": "frontend",
       "slug": "frontend",

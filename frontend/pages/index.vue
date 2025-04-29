@@ -1,9 +1,25 @@
 <script setup lang="ts">
 import { useStore } from "~/store";
 import { useLocalePath } from "#i18n";
+import { useAsyncData } from "nuxt/app";
+import { useApi } from "~/composables/useApi";
+import type { IResumeCardSmall, IVacancyCardSmall } from "~/types";
 
 const store = useStore()
 const localePath = useLocalePath()
+
+const { data: dataMain } = await useAsyncData<{
+  resume: IResumeCardSmall[],
+  vacancy: IResumeCardSmall[]
+}>('dataMain', async () => {
+  const { data: dataResume } = await useApi<{ data: IResumeCardSmall[] }>('/api/resume/main')
+  const { data: resume } = dataResume.value
+
+  const { data: dataVacancy } = await useApi<{ data: IVacancyCardSmall[] }>('/api/vacancy/main')
+  const { data: vacancy } = dataVacancy.value
+
+  return { resume, vacancy }
+})
 </script>
 
 <template>
@@ -25,7 +41,7 @@ const localePath = useLocalePath()
         <article>
           <v-row>
             <v-col
-                v-for="(card, index) in store.GET_VACANCY_MAIN"
+                v-for="(card, index) in dataMain?.vacancy || []"
                 :key="card.id"
                 cols="12"
                 :md="index === 2 ? 12 : 6"
@@ -46,7 +62,7 @@ const localePath = useLocalePath()
         <article>
           <v-row>
             <v-col
-                v-for="(card, index) in store.GET_RESUME_MAIN"
+                v-for="(card, index) in dataMain?.resume || []"
                 :key="card.id"
                 cols="12"
                 md="6"
